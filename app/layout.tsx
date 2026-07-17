@@ -17,8 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Centuria",
-  description: "Landing Page",
+  title: "Leviatán",
+  description:
+    "Leviatán, organiza personas. Comprende información. Decide mejor.",
+  icons: {
+    icon: "/favicon-leviatan.svg",
+  },
 };
 
 export default function RootLayout({

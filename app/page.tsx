@@ -1,234 +1,387 @@
-import Image from "next/image";
-import Stores from "./components/Stores";
+import Link from "next/link";
+import "./home.css";
+import LeviatanLogo from "./components/LeviatanLogo";
 import LinkTermsConditions from "./components/LinkTermsConditions";
-import HeaderLogin from "./components/button/HeaderLogin";
+import {
+  EyeIcon,
+  FlagMountainIcon,
+  TelescopeIcon,
+  UsersIcon,
+  PieChartIcon,
+  BarChartIcon,
+  HandshakeIcon,
+  TargetIcon,
+  RocketIcon,
+  EnvelopeIcon,
+  PhoneIcon,
+  NetworkIcon,
+} from "./components/icons/LandingIcons";
+
+const DEMO_MAILTO =
+  "mailto:hola@leviatan.io?subject=Solicitud%20de%20demo%20Leviat%C3%A1n";
+
+const permiteHacer = [
+  "Construir y visualizar redes humanas y equipos.",
+  "Coordinar actividades y dar seguimiento al cumplimiento de objetivos.",
+  "Centralizar información relevante en un solo lugar.",
+  "Medir indicadores y visualizar el progreso mediante paneles de control.",
+  "Fortalecer la colaboración entre personas y equipos.",
+  "Organizar iniciativas, proyectos y comunidades.",
+  "Facilitar la comunicación y el seguimiento de tareas.",
+  "Generar información útil para una mejor toma de decisiones.",
+];
+
+const beneficios = [
+  {
+    icon: NetworkIcon,
+    title: "Organización",
+    text: "Construye y visualiza redes humanas, equipos, iniciativas y proyectos.",
+  },
+  {
+    icon: PieChartIcon,
+    title: "Claridad",
+    text: "Centraliza la información relevante y toma decisiones con datos confiables.",
+  },
+  {
+    icon: BarChartIcon,
+    title: "Eficiencia",
+    text: "Mide indicadores y visualiza el progreso mediante paneles de control.",
+  },
+  {
+    icon: HandshakeIcon,
+    title: "Colaboración",
+    text: "Fortalece la colaboración entre personas y facilita la comunicación.",
+  },
+  {
+    icon: TargetIcon,
+    title: "Impacto",
+    text: "Genera información útil para decisiones y un impacto sostenible.",
+  },
+];
+
+const networkNodes = [
+  { icon: UsersIcon, top: -19, left: 111 },
+  { icon: HandshakeIcon, top: 46, left: 223.6 },
+  { icon: PieChartIcon, top: 176, left: 223.6 },
+  { icon: BarChartIcon, top: 241, left: 111 },
+  { icon: TargetIcon, top: 176, left: -1.6 },
+  { icon: NetworkIcon, top: 46, left: -1.6 },
+];
+
+const chaosDots = [
+  { top: "8%", left: "20%" },
+  { top: "15%", left: "55%" },
+  { top: "5%", left: "80%" },
+  { top: "25%", left: "10%" },
+  { top: "30%", left: "40%" },
+  { top: "22%", left: "68%" },
+  { top: "42%", left: "25%" },
+  { top: "48%", left: "58%" },
+  { top: "38%", left: "88%" },
+  { top: "55%", left: "5%" },
+  { top: "60%", left: "42%" },
+  { top: "65%", left: "72%" },
+  { top: "75%", left: "18%" },
+  { top: "80%", left: "50%" },
+  { top: "70%", left: "92%" },
+  { top: "90%", left: "30%" },
+  { top: "92%", left: "65%" },
+  { top: "12%", left: "35%" },
+  { top: "50%", left: "90%" },
+  { top: "85%", left: "8%" },
+];
 
 export default function Home() {
   return (
-    <>
-      <header className="header">
-        <Image src="/logo.png" alt="logo" width={120} height={37.03} />
-        <HeaderLogin />
-      </header>
-      <main>
-        <div className="info-section">
-          <div className="texts">
-            <h1 className="info-title">¡Bienvenido a Centuria!</h1>
-            <p className="info-subtitle">Únete a la red de tu candidato</p>
-            <p className="info-subtitle">Suma personas a la red</p>
-            <Stores />
-            <div className="scores">
-              <div className="flex flex-col mr-8">
-                <h1 className="text-count">10K</h1>
-                <span className="font-light">
-                  Usuarios han descargado la app
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <h1 className="text-count">300</h1>
-                <span className="font-light">Candidatos activos</span>
-              </div>
-            </div>
-          </div>
-          <div className="app">
-            <Image src="/app.png" alt="app" width={350} height={550} />
-          </div>
-        </div>
-        <Stores extraClass="show-mobile" />
-        <div className="scores show-mobile">
-          <div className="flex flex-col mr-8">
-            <h1 className="text-count">10K</h1>
-            <span className="font-light">Usuarios han descargado la app</span>
-          </div>
-          <div className="flex flex-col">
-            <h1 className="text-count">300</h1>
-            <span className="font-light">Candidatos activos</span>
-          </div>
-        </div>
-        <div className="about-section">
-          <div className="about-images">
-            <div className="images-about">
-              <Image
-                className="about-img"
-                src="/app2.png"
-                alt="app"
-                width={220}
-                height={390}
-              />
-              <Image
-                className="about-img image-2"
-                src="/app3.png"
-                alt="app"
-                width={220}
-                height={390}
-              />
-            </div>
-          </div>
-          <div className="about-texts">
-            <h1 className="title">¿Quiénes somos?</h1>
-            <p className="about-text">
-              En Centuria creemos que el poder de una red está en su conexión
-              real. Por eso, creamos una plataforma que ayuda a personas, grupos
-              y organizaciones a construir y visualizar redes de contacto vivas,
-              activas y ubicadas en el mundo real. Nuestro enfoque es simple:
-              hacer que conectar sea tan natural como interactuar en tu día a
-              día.
-            </p>
-            <p className="about-text">
-              Somos un equipo apasionado por la tecnología y el impacto social,
-              convencidos de que las redes humanas son clave para el crecimiento
-              personal y profesional. Con Centuria, facilitamos la visibilidad,
-              la colaboración y el alcance entre personas que comparten
-              intereses, metas y territorios. Tu red no solo crece: se activa.
-            </p>
-          </div>
-        </div>
-        <div className="section">
-          <h1 className="title text-center">Beneficios</h1>
-          <p>
-            Con Centuria puedes construir y visualizar tu red de contactos de
-            forma clara, conectar con personas cercanas, descubrir oportunidades
-            de colaboración y potenciar tu alcance local y global en un solo
-            lugar.
-          </p>
-        </div>
-        <div className="section">
-          <h1 className="title text-center">¿Qué es Centuria?</h1>
-          <p>
-            <strong>Centuria</strong> es una plataforma de movilización
-            electoral inteligente diseñada para reclutar, gestionar y
-            multiplicar activistas al servicio de una causa social o política.
-          </p>
-          <p>
-            Integra{" "}
-            <strong>Smart Data, Inteligencia Artificial, gamificación</strong> y{" "}
-            <strong>análisis territorial</strong> para transformar cada zona
-            territorial estratégica en un frente de acción organizado, y a cada
-            activista en un agente de impacto real y expansivo.
-          </p>
-          <p>
-            <strong>Centuria</strong> dirige la movilización electoral como una
-            operación estratégica, permitiendo medir en tiempo real el
-            cumplimiento de metas, el avance territorial y la expansión del
-            liderazgo político.
-          </p>
-        </div>
-        <div className="section">
-          <h1 className="title text-center">Nuestra misión</h1>
-          <p>
-            <strong>
-              "Que nadie que quiera cambiar su país se quede sin las
-              herramientas para hacerlo."
-            </strong>
-          </p>
-          <p>
-            Centuria nace con una misión clara y urgente: Empoderar a toda
-            persona con el coraje de transformar su país, dándole acceso a las
-            herramientas del siglo XXI:{" "}
-            <strong>tecnología, datos, estrategia</strong> y
-            <strong>comunidad.</strong>
-          </p>
-          <p>
-            Transformamos la <strong>energía social</strong> en{" "}
-            <strong>capacidad política real.</strong>
-          </p>
-        </div>
-        <div className="section">
-          <h1 className="title text-center">Nuestra visión</h1>
-          <p>
-            Imaginamos una América Latina donde cualquier ciudadano comprometido
-            con una causa pueda construir mayorías, ganar elecciones y gobernar
-            con legitimidad.
-          </p>
-          <p>
-            Queremos ser la plataforma líder en{" "}
-            <strong>innovación política de base</strong>, empoderando a millones
-            de activistas, líderes sociales y ciudadanos a través de tecnología
-            de organización, IA, Smart Data y movilización electoral.
-          </p>
-        </div>
-        <div className="section">
-          <h1 className="title text-center">¿Qué permite hacer Centuria?</h1>
-          <p>
-            Centuria es una herramienta integral que le da superpoderes a
-            cualquier equipo de campaña o movimiento político desde la base. Sus
-            principales funciones incluyen:
-          </p>
-          <p>
-            ● 🔗 <strong>Construcción de redes:</strong> Visualiza el
-            crecimiento y la expansión de cada activista y su red.{" "}
-          </p>
-          <p>
-            ● ✅ <strong>Verificación antifraude:</strong> Garantiza que los
-            datos de crecimiento y movilización sean reales.
-          </p>
-          <p>
-            ● 🏆 <strong>Gamificación del desempeño:</strong> Mide, motiva y
-            reconoce el esfuerzo de cada activista.
-          </p>
-          <p>
-            ● 📲 <strong>Difusión y tracking de mensajes:</strong> Distribuye
-            contenidos clave y mide su impacto en redes sociales.
-          </p>
-          <p>
-            ● 📍 <strong>Geolocalización de actividades:</strong> Controla en
-            tiempo real el cumplimiento de metas en zonas objetivo.
-          </p>
-          <p>
-            ● 🗳{" "}
-            <strong>
-              Seguimiento por centro de votación o zona estratégica:
-            </strong>{" "}
-            Comprueba la organización y expansión en cada punto del territorio.
-          </p>
-          <p>
-            ● 💬 <strong>Whatsapp hiperlocalizado:</strong> Conecta a votantes y
-            activistas según su centro de votación específico.
-          </p>
-          <p>
-            ● 🤖 <strong>IA + Smart Data para decisiones:</strong> Toma mejores
-            decisiones de acción política con inteligencia artificial basada en
-            datos.
-          </p>
-        </div>
-        <hr />
-        <div className="section">
-          <p>
-            <strong>Centuria</strong> es más que una plataforma:{" "}
-          </p>
-          <p>Es el cerebro digital de una campaña territorial moderna.</p>
-          <p>Una herramienta para construir poder desde las raíces.</p>
-          <p>Construye tu capital político palpable y cuantificable.</p>
-          <p>Tecnología, datos y estrategia al servicio de tu causa.</p>
-          <p>
-            Tú ejército de activistas organizado, geolocalizado y operativo: en
-            la calle y desde su smartphone.
-          </p>
-        </div>{" "}
-        <hr />
-        <div className="section">
-          <p>
-            <strong>Centuria es tu ventaja estratégica.</strong>
-          </p>
-        </div>
-        <hr />
-        <div className="section">
-          <h1 className="title">Datos de contacto</h1>
-          <ul className="contact-options">
+    <div className="lv-page">
+      <header className="lv-header lv-container">
+        <LeviatanLogo />
+        <nav className="lv-nav">
+          <ul className="lv-nav-links">
             <li>
-              <Image src="/phone.svg" alt="app" width={18} height={18} />
-              <span>+34 623 154 258</span>
+              <a href="#que-es">¿Qué es Leviatán?</a>
             </li>
             <li>
-              <Image src="/instagram.svg" alt="app" width={18} height={18} />
-              <span>@Centuria100</span>
+              <a href="#funcionalidades">Funcionalidades</a>
             </li>
             <li>
-              <LinkTermsConditions />
+              <a href="#beneficios">Beneficios</a>
+            </li>
+            <li>
+              <a href="#contacto">Contacto</a>
             </li>
           </ul>
-        </div>
+          <div className="lv-header-actions">
+            <Link href="/login" className="lv-login-link">
+              Iniciar sesión
+            </Link>
+            <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
+              Solicita una demo
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section className="lv-hero lv-container">
+          <EyeIcon size={48} className="lv-hero-icon" />
+          <h1>
+            Leviatán, organiza personas.
+            <br />
+            Comprende información. <span className="lv-hero-highlight">Decide mejor.</span>
+          </h1>
+          <div className="lv-hero-sub">
+            <p>
+              Leviatán es una plataforma tecnológica diseñada para ayudar a
+              organizaciones, equipos de trabajo, líderes, comunidades y
+              causas sociales a organizar personas, comprender información,
+              fortalecer relaciones y tomar mejores decisiones mediante
+              herramientas digitales.
+            </p>
+            <p>
+              Una plataforma diseñada para ayudar a los equipos a crecer,
+              coordinarse y generar un impacto real.
+            </p>
+          </div>
+          <div className="lv-hero-cta">
+            <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
+              Solicita una demo
+            </a>
+          </div>
+        </section>
+
+        <section id="que-es" className="lv-section lv-container">
+          <div className="lv-what-grid">
+            <div className="lv-what-text">
+              <div className="lv-eyebrow">¿Qué es Leviatán?</div>
+              <h2 className="lv-section-title">¿Qué es Leviatán?</h2>
+              <p>
+                Leviatán es una plataforma tecnológica diseñada para ayudar a
+                organizaciones, equipos de trabajo, líderes, comunidades y
+                causas sociales a organizar personas, comprender información,
+                fortalecer relaciones y tomar mejores decisiones mediante
+                herramientas digitales.
+              </p>
+              <p>
+                Integra herramientas para la coordinación de equipos, análisis
+                de información, seguimiento de actividades, visualización de
+                redes humanas y medición del progreso, permitiendo transformar
+                información dispersa en conocimiento accionable.
+              </p>
+              <p>
+                Leviatán impulsa una gestión organizada, colaborativa y
+                orientada a resultados, ofreciendo una experiencia moderna,
+                escalable y fácil de adoptar para cualquier organización.
+              </p>
+            </div>
+            <div>
+              <div className="lv-quote-card">
+                <span className="lv-quote-mark">&ldquo;</span>
+                <p>
+                  Transformar información dispersa en conocimiento accionable.
+                </p>
+                <div className="lv-chaos-order">
+                  <div className="lv-chaos">
+                    {chaosDots.map((dot, i) => (
+                      <span key={i} style={{ top: dot.top, left: dot.left }} />
+                    ))}
+                  </div>
+                  <span className="lv-chaos-order-arrow">&rarr;</span>
+                  <div className="lv-order">
+                    {Array.from({ length: 16 }).map((_, i) => (
+                      <span key={i} />
+                    ))}
+                  </div>
+                </div>
+                <div className="lv-chaos-order-labels">
+                  <span>CAOS</span>
+                  <span>ORDEN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="lv-section lv-section-band">
+          <div className="lv-container lv-mv-grid">
+            <div className="lv-mv-col">
+              <div className="lv-mv-icon">
+                <FlagMountainIcon size={28} />
+              </div>
+              <h3>Nuestra misión</h3>
+              <p>
+                Democratizar el acceso a herramientas tecnológicas de alto
+                nivel para que organizaciones, líderes y comunidades puedan
+                coordinarse mejor, fortalecer sus relaciones y generar un
+                impacto sostenible.
+              </p>
+            </div>
+
+            <div>
+              <div className="lv-network">
+                <div className="lv-network-ring lv-network-ring--outer" />
+                <div className="lv-network-ring lv-network-ring--inner" />
+                <div className="lv-network-center">
+                  <EyeIcon size={30} />
+                </div>
+                {networkNodes.map((node, i) => {
+                  const Icon = node.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="lv-network-node"
+                      style={{ top: node.top, left: node.left }}
+                    >
+                      <Icon size={18} />
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="lv-network-caption">
+                Coordina equipos, da seguimiento a actividades y mide el
+                progreso en tiempo real.
+              </p>
+            </div>
+
+            <div className="lv-mv-col">
+              <div className="lv-mv-icon">
+                <TelescopeIcon size={28} />
+              </div>
+              <h3>Nuestra visión</h3>
+              <p>
+                Ser la plataforma de referencia para la organización y
+                coordinación de equipos y comunidades, reconocida por
+                transformar datos e interacción humana en decisiones más
+                inteligentes, fortaleciendo el liderazgo y la colaboración en
+                cualquier contexto.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="funcionalidades" className="lv-section lv-container">
+          <h2 className="lv-section-title lv-text-center">
+            ¿Qué permite hacer Leviatán?
+          </h2>
+          <div className="lv-permite-grid">
+            <div className="lv-orb" />
+            <ul className="lv-permite-list">
+              {permiteHacer.map((item, i) => (
+                <li key={i}>
+                  <span className="lv-permite-num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section id="beneficios" className="lv-section lv-section-band">
+          <div className="lv-container">
+            <h2 className="lv-section-title lv-text-center">
+              Beneficios clave
+            </h2>
+            <div className="lv-benefits-grid">
+              {beneficios.map((b, i) => {
+                const Icon = b.icon;
+                return (
+                  <div key={i} className="lv-benefit-card">
+                    <div className="lv-benefit-icon">
+                      <Icon size={24} />
+                    </div>
+                    <h3>{b.title}</h3>
+                    <p>{b.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="lv-section lv-container">
+          <div className="lv-closing">
+            <p>Leviatán es más que una plataforma.</p>
+            <p>
+              Es un espacio donde la tecnología fortalece la organización, el
+              liderazgo y la colaboración.
+            </p>
+          </div>
+        </section>
+
+        <section className="lv-container">
+          <div className="lv-cta-banner">
+            <div className="lv-cta-left">
+              <div className="lv-cta-icon">
+                <RocketIcon size={26} />
+              </div>
+              <div>
+                <h3>Comienza la transición hacia el orden.</h3>
+                <p>
+                  Descubre cómo Leviatán puede ayudarte a organizar,
+                  comprender y decidir mejor.
+                </p>
+              </div>
+            </div>
+            <div className="lv-cta-actions">
+              <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
+                Solicita una demo
+              </a>
+              <a className="lv-btn lv-btn-outline" href="#que-es">
+                Conocer la plataforma
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <footer id="contacto" className="lv-footer">
+          <div className="lv-container">
+            <div className="lv-footer-grid">
+              <div>
+                <LeviatanLogo />
+                <p className="lv-footer-tagline">
+                  Tecnología, datos y estrategia al servicio de las personas.
+                </p>
+              </div>
+              <div>
+                <h4>Enlaces</h4>
+                <ul className="lv-footer-links">
+                  <li>
+                    <a href="#que-es">¿Qué es Leviatán?</a>
+                  </li>
+                  <li>
+                    <a href="#funcionalidades">Funcionalidades</a>
+                  </li>
+                  <li>
+                    <a href="#beneficios">Beneficios</a>
+                  </li>
+                  <li>
+                    <LinkTermsConditions />
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4>Contacto</h4>
+                <ul className="lv-footer-links lv-footer-contact">
+                  <li>
+                    <EnvelopeIcon size={16} />
+                    <a href={DEMO_MAILTO}>hola@leviatan.io</a>
+                  </li>
+                  <li>
+                    <PhoneIcon size={16} />
+                    <span>Próximamente</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="lv-footer-bottom">
+              © {new Date().getFullYear()} Leviatán. Todos los derechos
+              reservados.
+            </div>
+          </div>
+        </footer>
       </main>
-    </>
+    </div>
   );
 }

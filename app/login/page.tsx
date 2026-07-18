@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./login.css";
 import LoginForm from "./loginForm";
 import LeviatanLogo from "@/app/components/LeviatanLogo";
@@ -5,6 +6,9 @@ import LeviatanLogo from "@/app/components/LeviatanLogo";
 export default function Home() {
   return (
     <div className="login-root">
+      <Link href="/" className="login-back">
+        &larr; Volver
+      </Link>
       <div className="login-container">
         <div className="login-header">
           <LeviatanLogo size={28} className="login-logo" />

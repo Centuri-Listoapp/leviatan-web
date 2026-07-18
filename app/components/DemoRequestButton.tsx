@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Props = {
   className?: string;
@@ -11,8 +12,21 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const DemoRequestButton = ({ className, children }: Props) => {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   const close = () => {
     setOpen(false);
@@ -56,92 +70,93 @@ const DemoRequestButton = ({ className, children }: Props) => {
     }
   };
 
+  const modal = (
+    <div className="lv-modal-backdrop" onClick={close}>
+      <div
+        className="lv-modal"
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="lv-modal-close"
+          onClick={close}
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+
+        {status === "success" ? (
+          <div className="lv-modal-success">
+            <h3>¡Gracias!</h3>
+            <p>
+              Recibimos tu solicitud. Nuestro equipo te contactará muy
+              pronto.
+            </p>
+            <button
+              type="button"
+              className="lv-btn lv-btn-outline"
+              onClick={close}
+            >
+              Cerrar
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3>Solicita una demo</h3>
+            <p className="lv-modal-subtitle">
+              Déjanos tus datos y te contactaremos para mostrarte Leviatán.
+            </p>
+
+            <form onSubmit={onSubmit} className="lv-modal-form">
+              <label>
+                Nombre*
+                <input type="text" name="name" required autoComplete="name" />
+              </label>
+              <label>
+                Correo electrónico*
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  autoComplete="email"
+                />
+              </label>
+              <label>
+                Teléfono
+                <input type="tel" name="phone" autoComplete="tel" />
+              </label>
+              <label>
+                Mensaje
+                <textarea name="message" rows={3} />
+              </label>
+
+              {status === "error" && (
+                <p className="lv-modal-error">{errorMsg}</p>
+              )}
+
+              <button
+                type="submit"
+                className="lv-btn lv-btn-primary"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? "Enviando..." : "Enviar"}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <button type="button" className={className} onClick={() => setOpen(true)}>
         {children}
       </button>
 
-      {open && (
-        <div className="lv-modal-backdrop" onClick={close}>
-          <div
-            className="lv-modal"
-            role="dialog"
-            aria-modal="true"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="lv-modal-close"
-              onClick={close}
-              aria-label="Cerrar"
-            >
-              &times;
-            </button>
-
-            {status === "success" ? (
-              <div className="lv-modal-success">
-                <h3>¡Gracias!</h3>
-                <p>
-                  Recibimos tu solicitud. Nuestro equipo te contactará muy
-                  pronto.
-                </p>
-                <button
-                  type="button"
-                  className="lv-btn lv-btn-outline"
-                  onClick={close}
-                >
-                  Cerrar
-                </button>
-              </div>
-            ) : (
-              <>
-                <h3>Solicita una demo</h3>
-                <p className="lv-modal-subtitle">
-                  Déjanos tus datos y te contactaremos para mostrarte
-                  Leviatán.
-                </p>
-
-                <form onSubmit={onSubmit} className="lv-modal-form">
-                  <label>
-                    Nombre*
-                    <input type="text" name="name" required autoComplete="name" />
-                  </label>
-                  <label>
-                    Correo electrónico*
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      autoComplete="email"
-                    />
-                  </label>
-                  <label>
-                    Teléfono
-                    <input type="tel" name="phone" autoComplete="tel" />
-                  </label>
-                  <label>
-                    Mensaje
-                    <textarea name="message" rows={3} />
-                  </label>
-
-                  {status === "error" && (
-                    <p className="lv-modal-error">{errorMsg}</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    className="lv-btn lv-btn-primary"
-                    disabled={status === "loading"}
-                  >
-                    {status === "loading" ? "Enviando..." : "Enviar"}
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+      {open && mounted && createPortal(modal, document.body)}
     </>
   );
 };

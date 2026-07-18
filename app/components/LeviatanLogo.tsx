@@ -11,7 +11,7 @@ const LeviatanLogo = ({ size = 34, className }: Props) => {
   return (
     <span className={`lv-logo ${className ?? ""}`}>
       <LeviatanMarkIcon size={size} className="lv-logo-icon" />
-      <span className="lv-logo-text">Leviatán</span>
+      <span className="lv-logo-text">LEVIATAN</span>
     </span>
   );
 };

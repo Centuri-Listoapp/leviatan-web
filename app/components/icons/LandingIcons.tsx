@@ -14,19 +14,32 @@ const base = {
 };
 
 export const LeviatanMarkIcon = ({ size = 24, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
+  <svg
+    width={size * 1.67}
+    height={size}
+    viewBox="0 0 100 60"
+    fill="none"
+    className={className}
+  >
     <path
-      d="M4 24C10 14 17 9 24 9C31 9 38 14 44 24C38 34 31 39 24 39C17 39 10 34 4 24Z"
+      d="M6,30 C6,30 22,6 50,6 C78,6 94,30 94,30 C94,30 78,54 50,54 C22,54 6,30 6,30 Z"
       stroke="currentColor"
-      strokeWidth={3}
+      strokeWidth={4.2}
       strokeLinejoin="round"
     />
-    <circle cx="24" cy="24" r="9" stroke="currentColor" strokeWidth={2.4} />
-    <circle cx="24" cy="24" r="4" fill="currentColor" />
-    <circle cx="24" cy="15.5" r="1.6" fill="currentColor" />
-    <circle cx="24" cy="32.5" r="1.6" fill="currentColor" />
-    <circle cx="15.5" cy="24" r="1.6" fill="currentColor" />
-    <circle cx="32.5" cy="24" r="1.6" fill="currentColor" />
+    <circle
+      cx="50"
+      cy="30"
+      r="17"
+      stroke="currentColor"
+      strokeWidth={4.2}
+      strokeDasharray="9 4.35"
+    />
+    <rect x="35.6" y="26" width="3.2" height="8" rx="1.6" fill="currentColor" />
+    <rect x="42" y="23" width="3.2" height="14" rx="1.6" fill="currentColor" />
+    <rect x="48.4" y="20" width="3.2" height="20" rx="1.6" fill="currentColor" />
+    <rect x="54.8" y="23" width="3.2" height="14" rx="1.6" fill="currentColor" />
+    <rect x="61.2" y="26" width="3.2" height="8" rx="1.6" fill="currentColor" />
   </svg>
 );
 

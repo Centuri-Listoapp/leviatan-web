@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const CONTACT_EMAIL = "equipoleviatania@gmail.com";
+const NOTIFY_EMAILS = [CONTACT_EMAIL, "miguel.listoapp@gmail.com"];
 
 function escapeHtml(value: string) {
   return value
@@ -40,8 +41,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const { error } = await resend.emails.send({
-      from: "Leviatán <onboarding@resend.dev>",
-      to: CONTACT_EMAIL,
+      from: "Leviatán <notificaciones@leviatania.com>",
+      to: NOTIFY_EMAILS,
       replyTo: email,
       subject: `Nueva solicitud de demo — ${name}`,
       html: `

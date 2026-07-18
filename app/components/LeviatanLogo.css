@@ -10,9 +10,9 @@
 }
 
 .lv-logo-text {
-  font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
 }

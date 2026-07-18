@@ -10,6 +10,19 @@
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
+  position: relative;
+}
+.login-back {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  color: #dbdbdb;
+  font-size: 14px;
+  text-decoration: none;
+  z-index: 2;
+}
+.login-back:hover {
+  color: #ffffff;
 }
 .login-container {
   max-width: 340px;

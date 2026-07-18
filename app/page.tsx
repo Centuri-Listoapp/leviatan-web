@@ -3,6 +3,7 @@ import "./home.css";
 import LeviatanLogo from "./components/LeviatanLogo";
 import LinkTermsConditions from "./components/LinkTermsConditions";
 import DemoRequestButton from "./components/DemoRequestButton";
+import MobileNav from "./components/MobileNav";
 import {
   LeviatanMarkIcon,
   MissionIcon,
@@ -114,6 +115,7 @@ export default function Home() {
             <DemoRequestButton className="lv-btn lv-btn-primary">
               Solicita una demo
             </DemoRequestButton>
+            <MobileNav />
           </div>
         </div>
       </header>
@@ -159,7 +161,7 @@ export default function Home() {
 
           <div className="lv-diagram-wrap">
             <svg viewBox="0 0 580 320" width="100%">
-              <g fill="#0F2238">
+              <g fill="#0B1D3F">
                 {chaosDots.map(([cx, cy, r], i) => (
                   <circle key={i} cx={cx} cy={cy} r={r} />
                 ))}
@@ -169,7 +171,7 @@ export default function Home() {
                   <path key={i} d={d} />
                 ))}
               </g>
-              <g stroke="#F1C88A" strokeWidth="1.4">
+              <g stroke="#E3C77E" strokeWidth="1.4">
                 {GRID_ROWS.map((y) => (
                   <line key={`h-${y}`} x1={GRID_COLS[0]} y1={y} x2={GRID_COLS[GRID_COLS.length - 1]} y2={y} />
                 ))}
@@ -177,7 +179,7 @@ export default function Home() {
                   <line key={`v-${x}`} x1={x} y1={GRID_ROWS[0]} x2={x} y2={GRID_ROWS[GRID_ROWS.length - 1]} />
                 ))}
               </g>
-              <g fill="#E08A2E">
+              <g fill="#C9971A">
                 {GRID_ROWS.map((cy) =>
                   GRID_COLS.map((cx) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" />)
                 )}
@@ -314,7 +316,27 @@ export default function Home() {
           </div>
         </div>
 
-        <footer id="contacto" className="lv-footer">
+        <section id="contacto" className="lv-section lv-contact">
+          <div className="lv-container">
+            <h2 className="lv-contact-title">Agenda una reunión</h2>
+            <p className="lv-contact-subtitle">
+              Elige un horario que te acomode y conversemos sobre cómo
+              Leviatán puede ayudarte a organizar, comprender y decidir
+              mejor.
+            </p>
+            <div className="lv-calendar-wrap">
+              <iframe
+                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ09s4A_wzphs-A5Fi19S5zyNPGhurBe8UcXuJRwkPAoxIxRoN865VEp5QKjnd51mIdNrFt1nhGv?gv=true"
+                style={{ border: 0 }}
+                width="100%"
+                height={1050}
+                frameBorder={0}
+              />
+            </div>
+          </div>
+        </section>
+
+        <footer className="lv-footer">
           <div className="lv-footer-grid">
             <div className="lv-footer-brand">
               <a href="#">

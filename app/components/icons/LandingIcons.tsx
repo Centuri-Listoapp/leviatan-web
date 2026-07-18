@@ -8,118 +8,115 @@ type IconProps = {
 const base = {
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.6,
+  strokeWidth: 1.8,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
 };
 
-export const EyeIcon = ({ size = 24, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <circle cx="12" cy="12" r="10.5" {...base} />
-    <circle cx="12" cy="12" r="6.5" {...base} />
-    <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+export const LeviatanMarkIcon = ({ size = 24, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
+    <path
+      d="M4 24C10 14 17 9 24 9C31 9 38 14 44 24C38 34 31 39 24 39C17 39 10 34 4 24Z"
+      stroke="currentColor"
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+    <circle cx="24" cy="24" r="9" stroke="currentColor" strokeWidth={2.4} />
+    <circle cx="24" cy="24" r="4" fill="currentColor" />
+    <circle cx="24" cy="15.5" r="1.6" fill="currentColor" />
+    <circle cx="24" cy="32.5" r="1.6" fill="currentColor" />
+    <circle cx="15.5" cy="24" r="1.6" fill="currentColor" />
+    <circle cx="32.5" cy="24" r="1.6" fill="currentColor" />
   </svg>
 );
 
-export const FlagMountainIcon = ({ size = 24, className }: IconProps) => (
+export const MissionIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M3 20 L9 8 L12.5 14 L15 10 L21 20 Z" {...base} />
-    <path d="M9 8 L9 3" {...base} />
-    <path d="M9 3 L14.5 4.6 L9 6.2 Z" {...base} />
+    <path d="M5 3v18" {...base} />
+    <path d="M5 4h10l-2 3 2 3H5" {...base} />
+    <path d="M9 18l4-3" {...base} />
   </svg>
 );
 
-export const TelescopeIcon = ({ size = 24, className }: IconProps) => (
+export const VisionIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M3 17 L14 9" {...base} />
-    <path d="M4.5 19.5 L6.5 16" {...base} />
-    <rect x="12.3" y="6.4" width="8.5" height="4.4" rx="1" transform="rotate(28 16.5 8.6)" {...base} />
-    <circle cx="20.2" cy="6" r="1.3" {...base} />
-    <path d="M9 18 L15 18" {...base} />
+    <path d="M3 12l7-3 4 4 7-9" {...base} />
+    <circle cx="12" cy="12" r="9" {...base} />
   </svg>
 );
 
-export const UsersIcon = ({ size = 24, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <circle cx="9" cy="8" r="3" {...base} />
-    <path d="M3.5 20 C3.5 15.8 6 14 9 14 C12 14 14.5 15.8 14.5 20" {...base} />
-    <circle cx="17" cy="9" r="2.4" {...base} />
-    <path d="M15 14.2 C17.6 14.2 20.5 15.6 20.5 19.4" {...base} />
+export const PersonFilledIcon = ({ size = 24, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
   </svg>
 );
 
-export const PieChartIcon = ({ size = 24, className }: IconProps) => (
+export const MicIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M12 3 A9 9 0 1 1 5 18" {...base} />
-    <path d="M12 3 L12 12 L20 12" {...base} />
+    <path d="M12 1v6m0 6v10" {...base} />
+    <rect x="9" y="2" width="6" height="13" rx="3" {...base} />
+    <path d="M5 10a7 7 0 0014 0" {...base} />
   </svg>
 );
 
-export const BarChartIcon = ({ size = 24, className }: IconProps) => (
+export const OrgChartIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M4 20 L4 12" {...base} />
-    <path d="M11 20 L11 7" {...base} />
-    <path d="M18 20 L18 10" {...base} />
-    <path d="M3 20 L21 20" {...base} />
-    <path d="M4 12 L11 7 L18 10 L21 6" {...base} />
+    <circle cx="12" cy="6" r="2.4" {...base} />
+    <circle cx="5" cy="17" r="2.4" {...base} />
+    <circle cx="19" cy="17" r="2.4" {...base} />
+    <path d="M12 8.4V13m0 0l-5 3m5-3l5 3" {...base} />
   </svg>
 );
 
-export const HandshakeIcon = ({ size = 24, className }: IconProps) => (
+export const ClockIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M2 12 L6 9 L10 11.5" {...base} />
-    <path d="M22 12 L18 9 L14.5 11.2" {...base} />
-    <path d="M6 9 L11 13.5 C12 14.4 13.4 14.2 14.1 13.2 L18 9" {...base} />
-    <path d="M9 12.5 L10.8 14 C11.6 14.7 12.9 14.5 13.5 13.7" {...base} />
+    <circle cx="12" cy="12" r="9" {...base} />
+    <path d="M12 3v9l6 3" {...base} />
+  </svg>
+);
+
+export const BarsIcon = ({ size = 24, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
+    <path d="M4 19V9m6 10V5m6 14v-7" {...base} />
+    <path d="M3 19h18" {...base} />
+  </svg>
+);
+
+export const PeopleIcon = ({ size = 24, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
+    <circle cx="8" cy="9" r="3" {...base} />
+    <circle cx="17" cy="9" r="3" {...base} />
+    <path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M13 14c3.3 0 6 2.7 6 6" {...base} />
   </svg>
 );
 
 export const TargetIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
     <circle cx="12" cy="12" r="9" {...base} />
-    <circle cx="12" cy="12" r="5" {...base} />
-    <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="4.2" {...base} />
+    <circle cx="12" cy="12" r="0.8" fill="currentColor" stroke="none" />
   </svg>
 );
 
 export const RocketIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M12 2 C15 4.5 16.5 8.5 15.6 13 L8.4 13 C7.5 8.5 9 4.5 12 2 Z" {...base} />
-    <circle cx="12" cy="8.5" r="1.5" {...base} />
-    <path d="M8.4 13 L5.5 16 L8.6 15.3" {...base} />
-    <path d="M15.6 13 L18.5 16 L15.4 15.3" {...base} />
-    <path d="M10 15.5 L9 21 L12 18.8 L15 21 L14 15.5" {...base} />
+    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" {...base} />
+    <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" {...base} />
+    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" {...base} />
+    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" {...base} />
   </svg>
 );
 
 export const EnvelopeIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <rect x="2.5" y="5" width="19" height="14" rx="2" {...base} />
-    <path d="M3.5 6.5 L12 13 L20.5 6.5" {...base} />
+    <rect x="3" y="5" width="18" height="14" rx="2" {...base} />
+    <path d="M3 6l9 7 9-7" {...base} />
   </svg>
 );
 
 export const PhoneIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <path d="M5 3.5 L9 3.5 L10.5 8 L8 9.5 C9 12.5 11.5 15 14.5 16 L16 13.5 L20.5 15 L20.5 19 C20.5 20 19.7 20.7 18.7 20.6 C10.8 19.9 4.1 13.2 3.4 5.3 C3.3 4.3 4 3.5 5 3.5 Z" {...base} />
-  </svg>
-);
-
-export const NetworkIcon = ({ size = 24, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <circle cx="12" cy="4.5" r="2" {...base} />
-    <circle cx="5" cy="18" r="2" {...base} />
-    <circle cx="19" cy="18" r="2" {...base} />
-    <circle cx="12" cy="12" r="2" {...base} />
-    <path d="M12 6.5 L12 10" {...base} />
-    <path d="M10.5 13.2 L6.3 16.5" {...base} />
-    <path d="M13.5 13.2 L17.7 16.5" {...base} />
-  </svg>
-);
-
-export const CheckCircleIcon = ({ size = 24, className }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
-    <circle cx="12" cy="12" r="9.5" {...base} />
-    <path d="M8 12.3 L10.7 15 L16 9" {...base} />
+    <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" {...base} />
   </svg>
 );

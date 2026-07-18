@@ -1,17 +1,17 @@
 import React from "react";
-import { EyeIcon } from "./icons/LandingIcons";
+import { LeviatanMarkIcon } from "./icons/LandingIcons";
+import "./LeviatanLogo.css";
 
 type Props = {
   size?: number;
-  showText?: boolean;
   className?: string;
 };
 
-const LeviatanLogo = ({ size = 28, showText = true, className }: Props) => {
+const LeviatanLogo = ({ size = 34, className }: Props) => {
   return (
     <span className={`lv-logo ${className ?? ""}`}>
-      <EyeIcon size={size} className="lv-logo-icon" />
-      {showText && <span className="lv-logo-text">Leviatán</span>}
+      <LeviatanMarkIcon size={size} className="lv-logo-icon" />
+      <span className="lv-logo-text">Leviatán</span>
     </span>
   );
 };

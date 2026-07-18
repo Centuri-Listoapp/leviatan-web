@@ -1,0 +1,18 @@
+.lv-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+}
+
+.lv-logo-icon {
+  flex-shrink: 0;
+}
+
+.lv-logo-text {
+  font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

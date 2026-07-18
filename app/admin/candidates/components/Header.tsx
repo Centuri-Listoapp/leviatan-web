@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Button from "@/app/components/button/Button";
 import authService from "@/app/services/authService";
 import { useRouter } from "next/navigation";
 import { logoutAction } from "@/app/utils/actions";
+import LeviatanLogo from "@/app/components/LeviatanLogo";
 
 const Header = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header className="admin-header ">
-      <Image src="/logo.png" alt="logo" width={120} height={37.03} />
+      <LeviatanLogo size={26} />
       <Button color="text" onClick={logout}>
         Cerrar sesión
       </Button>

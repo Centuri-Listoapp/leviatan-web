@@ -2,23 +2,24 @@ import Link from "next/link";
 import "./home.css";
 import LeviatanLogo from "./components/LeviatanLogo";
 import LinkTermsConditions from "./components/LinkTermsConditions";
+import DemoRequestButton from "./components/DemoRequestButton";
 import {
-  EyeIcon,
-  FlagMountainIcon,
-  TelescopeIcon,
-  UsersIcon,
-  PieChartIcon,
-  BarChartIcon,
-  HandshakeIcon,
+  LeviatanMarkIcon,
+  MissionIcon,
+  VisionIcon,
+  PersonFilledIcon,
+  MicIcon,
+  OrgChartIcon,
+  ClockIcon,
+  BarsIcon,
+  PeopleIcon,
   TargetIcon,
   RocketIcon,
   EnvelopeIcon,
-  PhoneIcon,
-  NetworkIcon,
 } from "./components/icons/LandingIcons";
 
-const DEMO_MAILTO =
-  "mailto:hola@leviatan.io?subject=Solicitud%20de%20demo%20Leviat%C3%A1n";
+const CONTACT_EMAIL = "equipoleviatania@gmail.com";
+const DEMO_MAILTO = `mailto:${CONTACT_EMAIL}?subject=Solicitud%20de%20demo%20Leviat%C3%A1n`;
 
 const permiteHacer = [
   "Construir y visualizar redes humanas y equipos.",
@@ -33,219 +34,208 @@ const permiteHacer = [
 
 const beneficios = [
   {
-    icon: NetworkIcon,
+    icon: OrgChartIcon,
     title: "Organización",
-    text: "Construye y visualiza redes humanas, equipos, iniciativas y proyectos.",
+    text: "Estructura equipos, proyectos y comunidades de forma simple.",
   },
   {
-    icon: PieChartIcon,
+    icon: ClockIcon,
     title: "Claridad",
-    text: "Centraliza la información relevante y toma decisiones con datos confiables.",
+    text: "Centraliza la información y toma decisiones con datos confiables.",
   },
   {
-    icon: BarChartIcon,
+    icon: BarsIcon,
     title: "Eficiencia",
-    text: "Mide indicadores y visualiza el progreso mediante paneles de control.",
+    text: "Automatiza procesos y ahorra tiempo en tareas operativas.",
   },
   {
-    icon: HandshakeIcon,
+    icon: PeopleIcon,
     title: "Colaboración",
-    text: "Fortalece la colaboración entre personas y facilita la comunicación.",
+    text: "Conecta personas y fortalece la comunicación en todos los niveles.",
   },
   {
     icon: TargetIcon,
     title: "Impacto",
-    text: "Genera información útil para decisiones y un impacto sostenible.",
+    text: "Mide resultados, aprende y mejora continuamente tu gestión.",
   },
 ];
 
-const networkNodes = [
-  { icon: UsersIcon, top: -19, left: 111 },
-  { icon: HandshakeIcon, top: 46, left: 223.6 },
-  { icon: PieChartIcon, top: 176, left: 223.6 },
-  { icon: BarChartIcon, top: 241, left: 111 },
-  { icon: TargetIcon, top: 176, left: -1.6 },
-  { icon: NetworkIcon, top: 46, left: -1.6 },
-];
+const avatarPositions = ["lv-a1", "lv-a2", "lv-a3", "lv-a4", "lv-a5", "lv-a6", "lv-a7"];
 
-const chaosDots = [
-  { top: "8%", left: "20%" },
-  { top: "15%", left: "55%" },
-  { top: "5%", left: "80%" },
-  { top: "25%", left: "10%" },
-  { top: "30%", left: "40%" },
-  { top: "22%", left: "68%" },
-  { top: "42%", left: "25%" },
-  { top: "48%", left: "58%" },
-  { top: "38%", left: "88%" },
-  { top: "55%", left: "5%" },
-  { top: "60%", left: "42%" },
-  { top: "65%", left: "72%" },
-  { top: "75%", left: "18%" },
-  { top: "80%", left: "50%" },
-  { top: "70%", left: "92%" },
-  { top: "90%", left: "30%" },
-  { top: "92%", left: "65%" },
-  { top: "12%", left: "35%" },
-  { top: "50%", left: "90%" },
-  { top: "85%", left: "8%" },
-];
+// Deterministic PRNG so the scattered dots render identically on server and client.
+function mulberry32(seed: number) {
+  return function random() {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const FOCAL: [number, number] = [232, 150];
+const GRID_COLS = [380, 420, 460, 500, 540];
+const GRID_ROWS = [20, 60, 100, 140, 180, 220, 260, 300];
+
+const rand = mulberry32(42);
+const chaosDots: [number, number, number][] = Array.from({ length: 150 }, () => {
+  const x = rand() * 224;
+  const taper = 150 - (x / 224) * 138;
+  const y = 150 + (rand() - 0.5) * 2 * taper;
+  const r = 1.3 + rand() * 1.5;
+  return [x, y, r];
+});
+
+const fanLines = GRID_ROWS.map((rowY) => {
+  const [fx, fy] = FOCAL;
+  const tx = GRID_COLS[0];
+  const cx = fx + (tx - fx) * 0.62;
+  const cy = fy + (rowY - fy) * 0.18;
+  return `M${fx},${fy} Q${cx},${cy} ${tx},${rowY}`;
+});
 
 export default function Home() {
   return (
     <div className="lv-page">
-      <header className="lv-header lv-container">
-        <LeviatanLogo />
-        <nav className="lv-nav">
-          <ul className="lv-nav-links">
-            <li>
-              <a href="#que-es">¿Qué es Leviatán?</a>
-            </li>
-            <li>
-              <a href="#funcionalidades">Funcionalidades</a>
-            </li>
-            <li>
-              <a href="#beneficios">Beneficios</a>
-            </li>
-            <li>
-              <a href="#contacto">Contacto</a>
-            </li>
-          </ul>
-          <div className="lv-header-actions">
-            <Link href="/login" className="lv-login-link">
-              Iniciar sesión
-            </Link>
-            <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
+      <header className="lv-header">
+        <div className="lv-nav lv-container">
+          <a href="#">
+            <LeviatanLogo size={34} />
+          </a>
+
+          <nav className="lv-nav-links">
+            <a href="#que-es">¿Qué es Leviatán?</a>
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+
+          <div className="lv-nav-cta">
+            <DemoRequestButton className="lv-btn lv-btn-primary">
               Solicita una demo
-            </a>
+            </DemoRequestButton>
           </div>
-        </nav>
+        </div>
       </header>
 
       <main>
-        <section className="lv-hero lv-container">
-          <EyeIcon size={48} className="lv-hero-icon" />
-          <h1>
-            Leviatán, organiza personas.
-            <br />
-            Comprende información. <span className="lv-hero-highlight">Decide mejor.</span>
-          </h1>
-          <div className="lv-hero-sub">
+        <section className="lv-hero" id="que-es">
+          <div className="lv-container">
+            <LeviatanMarkIcon size={64} className="lv-hero-icon" />
+
+            <h1>
+              Leviatán, organiza personas.
+              <br />
+              Comprende información. <span className="lv-accent">Decide mejor.</span>
+            </h1>
+
             <p>
-              Leviatán es una plataforma tecnológica diseñada para ayudar a
-              organizaciones, equipos de trabajo, líderes, comunidades y
-              causas sociales a organizar personas, comprender información,
-              fortalecer relaciones y tomar mejores decisiones mediante
-              herramientas digitales.
+              Leviatán es una plataforma tecnológica que ayuda a
+              organizaciones, equipos y comunidades a{" "}
+              <strong>
+                transformar información dispersa en conocimiento accionable.
+              </strong>
             </p>
             <p>
-              Una plataforma diseñada para ayudar a los equipos a crecer,
-              coordinarse y generar un impacto real.
+              Gestiona personas, actividades y datos en un solo lugar y toma
+              decisiones con claridad.
             </p>
-          </div>
-          <div className="lv-hero-cta">
-            <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
+
+            <DemoRequestButton className="lv-btn lv-btn-primary">
               Solicita una demo
-            </a>
+            </DemoRequestButton>
           </div>
         </section>
 
-        <section id="que-es" className="lv-section lv-container">
-          <div className="lv-what-grid">
-            <div className="lv-what-text">
-              <div className="lv-eyebrow">¿Qué es Leviatán?</div>
-              <h2 className="lv-section-title">¿Qué es Leviatán?</h2>
-              <p>
-                Leviatán es una plataforma tecnológica diseñada para ayudar a
-                organizaciones, equipos de trabajo, líderes, comunidades y
-                causas sociales a organizar personas, comprender información,
-                fortalecer relaciones y tomar mejores decisiones mediante
-                herramientas digitales.
-              </p>
-              <p>
-                Integra herramientas para la coordinación de equipos, análisis
-                de información, seguimiento de actividades, visualización de
-                redes humanas y medición del progreso, permitiendo transformar
-                información dispersa en conocimiento accionable.
-              </p>
-              <p>
-                Leviatán impulsa una gestión organizada, colaborativa y
-                orientada a resultados, ofreciendo una experiencia moderna,
-                escalable y fácil de adoptar para cualquier organización.
-              </p>
-            </div>
-            <div>
-              <div className="lv-quote-card">
-                <span className="lv-quote-mark">&ldquo;</span>
-                <p>
-                  Transformar información dispersa en conocimiento accionable.
-                </p>
-                <div className="lv-chaos-order">
-                  <div className="lv-chaos">
-                    {chaosDots.map((dot, i) => (
-                      <span key={i} style={{ top: dot.top, left: dot.left }} />
-                    ))}
-                  </div>
-                  <span className="lv-chaos-order-arrow">&rarr;</span>
-                  <div className="lv-order">
-                    {Array.from({ length: 16 }).map((_, i) => (
-                      <span key={i} />
-                    ))}
-                  </div>
-                </div>
-                <div className="lv-chaos-order-labels">
-                  <span>CAOS</span>
-                  <span>ORDEN</span>
-                </div>
-              </div>
+        <section className="lv-quote-section">
+          <div className="lv-quote-block">
+            <span className="lv-quote-mark">&ldquo;</span>
+            <h2>
+              El problema no es la data,
+              <br />
+              es la dispersión de la misma.
+            </h2>
+          </div>
+
+          <div className="lv-diagram-wrap">
+            <svg viewBox="0 0 580 320" width="100%">
+              <g fill="#0F2238">
+                {chaosDots.map(([cx, cy, r], i) => (
+                  <circle key={i} cx={cx} cy={cy} r={r} />
+                ))}
+              </g>
+              <g stroke="#C9D3E4" strokeWidth="1" fill="none">
+                {fanLines.map((d, i) => (
+                  <path key={i} d={d} />
+                ))}
+              </g>
+              <g stroke="#F1C88A" strokeWidth="1.4">
+                {GRID_ROWS.map((y) => (
+                  <line key={`h-${y}`} x1={GRID_COLS[0]} y1={y} x2={GRID_COLS[GRID_COLS.length - 1]} y2={y} />
+                ))}
+                {GRID_COLS.map((x) => (
+                  <line key={`v-${x}`} x1={x} y1={GRID_ROWS[0]} x2={x} y2={GRID_ROWS[GRID_ROWS.length - 1]} />
+                ))}
+              </g>
+              <g fill="#E08A2E">
+                {GRID_ROWS.map((cy) =>
+                  GRID_COLS.map((cx) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" />)
+                )}
+              </g>
+            </svg>
+            <div className="lv-diagram-labels">
+              <span>CAOS</span>
+              <span className="lv-arrow" />
+              <span>ORDEN</span>
             </div>
           </div>
         </section>
 
-        <section className="lv-section lv-section-band">
-          <div className="lv-container lv-mv-grid">
+        <section className="lv-mv-section" id="funcionalidades">
+          <div className="lv-mv-eyebrow">
+            <b>02</b> / EJECUCIÓN SIN FRICCIÓN
+          </div>
+
+          <div className="lv-mv-grid lv-container">
             <div className="lv-mv-col">
               <div className="lv-mv-icon">
-                <FlagMountainIcon size={28} />
+                <MissionIcon size={32} />
               </div>
               <h3>Nuestra misión</h3>
               <p>
-                Democratizar el acceso a herramientas tecnológicas de alto
-                nivel para que organizaciones, líderes y comunidades puedan
+                Potenciar el acceso a herramientas tecnológicas de alto nivel
+                para que organizaciones, líderes y comunidades puedan
                 coordinarse mejor, fortalecer sus relaciones y generar un
                 impacto sostenible.
               </p>
             </div>
 
-            <div>
-              <div className="lv-network">
-                <div className="lv-network-ring lv-network-ring--outer" />
-                <div className="lv-network-ring lv-network-ring--inner" />
-                <div className="lv-network-center">
-                  <EyeIcon size={30} />
+            <div className="lv-mv-divider" />
+
+            <div className="lv-mv-col">
+              <div className="lv-team-ring">
+                <div className="lv-ring-circle lv-ring-outer" />
+                <div className="lv-ring-circle lv-ring-inner" />
+                {avatarPositions.map((pos) => (
+                  <div key={pos} className={`lv-avatar ${pos}`}>
+                    <PersonFilledIcon size={24} />
+                  </div>
+                ))}
+                <div className="lv-avatar-center">
+                  <MicIcon size={44} />
                 </div>
-                {networkNodes.map((node, i) => {
-                  const Icon = node.icon;
-                  return (
-                    <div
-                      key={i}
-                      className="lv-network-node"
-                      style={{ top: node.top, left: node.left }}
-                    >
-                      <Icon size={18} />
-                    </div>
-                  );
-                })}
               </div>
-              <p className="lv-network-caption">
-                Coordina equipos, da seguimiento a actividades y mide el
-                progreso en tiempo real.
+              <p className="lv-team-caption">
+                Coordina actividades, asigna tareas, da seguimiento y mide
+                resultados en tiempo real.
               </p>
             </div>
 
+            <div className="lv-mv-divider" />
+
             <div className="lv-mv-col">
               <div className="lv-mv-icon">
-                <TelescopeIcon size={28} />
+                <VisionIcon size={32} />
               </div>
               <h3>Nuestra visión</h3>
               <p>
@@ -259,125 +249,120 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="funcionalidades" className="lv-section lv-container">
-          <h2 className="lv-section-title lv-text-center">
-            ¿Qué permite hacer Leviatán?
-          </h2>
-          <div className="lv-permite-grid">
-            <div className="lv-orb" />
-            <ul className="lv-permite-list">
-              {permiteHacer.map((item, i) => (
-                <li key={i}>
-                  <span className="lv-permite-num">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p>{item}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section id="beneficios" className="lv-section lv-section-band">
+        <section className="lv-features">
           <div className="lv-container">
-            <h2 className="lv-section-title lv-text-center">
-              Beneficios clave
-            </h2>
-            <div className="lv-benefits-grid">
-              {beneficios.map((b, i) => {
-                const Icon = b.icon;
-                return (
-                  <div key={i} className="lv-benefit-card">
-                    <div className="lv-benefit-icon">
-                      <Icon size={24} />
-                    </div>
-                    <h3>{b.title}</h3>
-                    <p>{b.text}</p>
+            <h2>¿Qué permite hacer Leviatán?</h2>
+            <div className="lv-features-grid">
+              <div className="lv-radial">
+                <div className="lv-radial-ring lv-r1" />
+                <div className="lv-radial-ring lv-r2" />
+                <div className="lv-radial-ring lv-r3" />
+              </div>
+
+              <div className="lv-feature-list">
+                {permiteHacer.map((item, i) => (
+                  <div key={i} className="lv-feature-item">
+                    <span className="lv-feature-num">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p>{item}</p>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="lv-section lv-container">
-          <div className="lv-closing">
-            <p>Leviatán es más que una plataforma.</p>
-            <p>
-              Es un espacio donde la tecnología fortalece la organización, el
-              liderazgo y la colaboración.
-            </p>
+        <section className="lv-benefits" id="beneficios">
+          <h2>Beneficios clave</h2>
+          <div className="lv-benefits-grid lv-container">
+            {beneficios.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <div key={i} className="lv-benefit">
+                  <div className="lv-mv-icon">
+                    <Icon size={28} />
+                  </div>
+                  <h3>{b.title}</h3>
+                  <p>{b.text}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        <section className="lv-container">
-          <div className="lv-cta-banner">
-            <div className="lv-cta-left">
-              <div className="lv-cta-icon">
-                <RocketIcon size={26} />
-              </div>
-              <div>
-                <h3>Comienza la transición hacia el orden.</h3>
-                <p>
-                  Descubre cómo Leviatán puede ayudarte a organizar,
-                  comprender y decidir mejor.
-                </p>
-              </div>
+        <div className="lv-cta-banner" id="demo">
+          <div className="lv-cta-left">
+            <div className="lv-cta-rocket">
+              <RocketIcon size={28} />
             </div>
-            <div className="lv-cta-actions">
-              <a className="lv-btn lv-btn-primary" href={DEMO_MAILTO}>
-                Solicita una demo
-              </a>
-              <a className="lv-btn lv-btn-outline" href="#que-es">
-                Conocer la plataforma
-              </a>
+            <div>
+              <h3>Comienza la transición hacia el orden.</h3>
+              <p>
+                Descubre cómo Leviatán puede ayudarte a organizar, comprender
+                y decidir mejor.
+              </p>
             </div>
           </div>
-        </section>
+          <div className="lv-cta-right">
+            <DemoRequestButton className="lv-btn lv-btn-primary">
+              Solicita una demo
+            </DemoRequestButton>
+            <a href="#que-es" className="lv-btn lv-btn-outline">
+              Conocer la plataforma
+            </a>
+          </div>
+        </div>
 
         <footer id="contacto" className="lv-footer">
-          <div className="lv-container">
-            <div className="lv-footer-grid">
-              <div>
-                <LeviatanLogo />
-                <p className="lv-footer-tagline">
-                  Tecnología, datos y estrategia al servicio de las personas.
-                </p>
-              </div>
-              <div>
-                <h4>Enlaces</h4>
-                <ul className="lv-footer-links">
-                  <li>
-                    <a href="#que-es">¿Qué es Leviatán?</a>
-                  </li>
-                  <li>
-                    <a href="#funcionalidades">Funcionalidades</a>
-                  </li>
-                  <li>
-                    <a href="#beneficios">Beneficios</a>
-                  </li>
-                  <li>
-                    <LinkTermsConditions />
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4>Contacto</h4>
-                <ul className="lv-footer-links lv-footer-contact">
-                  <li>
-                    <EnvelopeIcon size={16} />
-                    <a href={DEMO_MAILTO}>hola@leviatan.io</a>
-                  </li>
-                  <li>
-                    <PhoneIcon size={16} />
-                    <span>Próximamente</span>
-                  </li>
-                </ul>
-              </div>
+          <div className="lv-footer-grid">
+            <div className="lv-footer-brand">
+              <a href="#">
+                <LeviatanLogo size={30} />
+              </a>
+              <p>Tecnología, datos y estrategia al servicio de las personas.</p>
             </div>
-            <div className="lv-footer-bottom">
-              © {new Date().getFullYear()} Leviatán. Todos los derechos
-              reservados.
+
+            <div className="lv-footer-col">
+              <h4>Enlaces</h4>
+              <ul>
+                <li>
+                  <a href="#que-es">¿Qué es Leviatán?</a>
+                </li>
+                <li>
+                  <a href="#funcionalidades">Funcionalidades</a>
+                </li>
+                <li>
+                  <a href="#beneficios">Beneficios</a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="lv-footer-col">
+              <h4>Contacto</h4>
+              <ul className="lv-footer-contact">
+                <li>
+                  <EnvelopeIcon size={15} />
+                  <a href={DEMO_MAILTO}>{CONTACT_EMAIL}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="lv-footer-bottom">
+            <span>
+              Copyright © {new Date().getFullYear()} | Powered by{" "}
+              <a
+                href="https://www.listoapp.cl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Listo App
+              </a>
+            </span>
+            <div>
+              <Link href="/login">Iniciar sesión</Link>
+              <LinkTermsConditions />
             </div>
           </div>
         </footer>

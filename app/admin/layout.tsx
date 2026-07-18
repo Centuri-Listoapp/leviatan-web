@@ -15,9 +15,9 @@ export default async function AdminLayout({
   }
 
   return (
-    <>
+    <div className="admin-root">
       <Header />
       <main className="admin-container">{children}</main>
-    </>
+    </div>
   );
 }

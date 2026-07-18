@@ -1,4 +1,8 @@
 .login-root {
+  --secondary: #16274d;
+  --secondary-darker: #0d1730;
+  --border-color: #3b4d76;
+  --new-primary: #f2a53d;
   background-color: var(--secondary);
   min-height: 100vh;
   display: flex;
@@ -17,14 +21,7 @@
   z-index: 1;
 }
 .login-logo {
-  display: flex;
-  align-items: center;
   margin-bottom: 1rem;
-}
-.login-logo span {
-  font-size: 24px;
-  font-weight: bold;
-  margin-left: 1rem;
 }
 .login-title {
   font-weight: bold;

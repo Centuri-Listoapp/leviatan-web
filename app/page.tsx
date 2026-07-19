@@ -1,20 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 import "./home.css";
 import LeviatanLogo from "./components/LeviatanLogo";
 import LinkTermsConditions from "./components/LinkTermsConditions";
 import DemoRequestButton from "./components/DemoRequestButton";
 import MobileNav from "./components/MobileNav";
+import FeatureRadial from "./components/FeatureRadial";
 import {
   LeviatanMarkIcon,
-  MissionIcon,
-  VisionIcon,
-  PersonFilledIcon,
-  MicIcon,
-  OrgChartIcon,
-  ClockIcon,
-  BarsIcon,
-  PeopleIcon,
-  TargetIcon,
   RocketIcon,
   EnvelopeIcon,
 } from "./components/icons/LandingIcons";
@@ -35,65 +28,42 @@ const permiteHacer = [
 
 const beneficios = [
   {
-    icon: OrgChartIcon,
+    img: "/icons/organizacion-network.png",
     title: "Organización",
     text: "Estructura equipos, proyectos y comunidades de forma simple.",
   },
   {
-    icon: ClockIcon,
+    img: "/icons/claridad-bulb.png",
     title: "Claridad",
     text: "Centraliza la información y toma decisiones con datos confiables.",
   },
   {
-    icon: BarsIcon,
+    img: "/icons/eficiencia-target.png",
     title: "Eficiencia",
     text: "Automatiza procesos y ahorra tiempo en tareas operativas.",
   },
   {
-    icon: PeopleIcon,
+    img: "/icons/colaboracion-handshake.png",
     title: "Colaboración",
     text: "Conecta personas y fortalece la comunicación en todos los niveles.",
   },
   {
-    icon: TargetIcon,
+    img: "/icons/impacto-target.png",
     title: "Impacto",
     text: "Mide resultados, aprende y mejora continuamente tu gestión.",
   },
 ];
 
-const avatarPositions = ["lv-a1", "lv-a2", "lv-a3", "lv-a4", "lv-a5", "lv-a6", "lv-a7"];
-
-// Deterministic PRNG so the scattered dots render identically on server and client.
-function mulberry32(seed: number) {
-  return function random() {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const FOCAL: [number, number] = [232, 150];
-const GRID_COLS = [380, 420, 460, 500, 540];
-const GRID_ROWS = [20, 60, 100, 140, 180, 220, 260, 300];
-
-const rand = mulberry32(42);
-const chaosDots: [number, number, number][] = Array.from({ length: 150 }, () => {
-  const x = rand() * 224;
-  const taper = 150 - (x / 224) * 138;
-  const y = 150 + (rand() - 0.5) * 2 * taper;
-  const r = 1.3 + rand() * 1.5;
-  return [x, y, r];
-});
-
-const fanLines = GRID_ROWS.map((rowY) => {
-  const [fx, fy] = FOCAL;
-  const tx = GRID_COLS[0];
-  const cx = fx + (tx - fx) * 0.62;
-  const cy = fy + (rowY - fy) * 0.18;
-  return `M${fx},${fy} Q${cx},${cy} ${tx},${rowY}`;
-});
+const teamMembers = [
+  { pos: "lv-a1", img: "/team/carlos-guatemala.jpg", alt: "Carlos, Guatemala" },
+  { pos: "lv-a2", img: "/team/diego-cdmx.jpg", alt: "Diego, Ciudad de México" },
+  { pos: "lv-a3", img: "/team/quito-ecuador.jpg", alt: "Quito, Ecuador" },
+  { pos: "lv-a4", img: "/team/santiago-chile.jpg", alt: "Santiago, Chile" },
+  { pos: "lv-a5", img: "/team/buenos-aires-argentina.jpg", alt: "Buenos Aires, Argentina" },
+  { pos: "lv-a6", img: "/team/valeria-puebla.jpg", alt: "Valeria, Puebla, México" },
+  { pos: "lv-a7", img: "/team/bogota-colombia.jpg", alt: "Bogotá, Colombia" },
+  { pos: "lv-a8", img: "/team/medellin-colombia.jpg", alt: "Medellín, Colombia" },
+];
 
 export default function Home() {
   return (
@@ -126,7 +96,7 @@ export default function Home() {
             <LeviatanMarkIcon size={64} className="lv-hero-icon" />
 
             <h1>
-              Leviatán, organiza personas.
+              Organiza personas.
               <br />
               Comprende información. <span className="lv-accent">Decide mejor.</span>
             </h1>
@@ -160,36 +130,14 @@ export default function Home() {
           </div>
 
           <div className="lv-diagram-wrap">
-            <svg viewBox="0 0 580 320" width="100%">
-              <g fill="#0B1D3F">
-                {chaosDots.map(([cx, cy, r], i) => (
-                  <circle key={i} cx={cx} cy={cy} r={r} />
-                ))}
-              </g>
-              <g stroke="#C9D3E4" strokeWidth="1" fill="none">
-                {fanLines.map((d, i) => (
-                  <path key={i} d={d} />
-                ))}
-              </g>
-              <g stroke="#E3C77E" strokeWidth="1.4">
-                {GRID_ROWS.map((y) => (
-                  <line key={`h-${y}`} x1={GRID_COLS[0]} y1={y} x2={GRID_COLS[GRID_COLS.length - 1]} y2={y} />
-                ))}
-                {GRID_COLS.map((x) => (
-                  <line key={`v-${x}`} x1={x} y1={GRID_ROWS[0]} x2={x} y2={GRID_ROWS[GRID_ROWS.length - 1]} />
-                ))}
-              </g>
-              <g fill="#C9971A">
-                {GRID_ROWS.map((cy) =>
-                  GRID_COLS.map((cx) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" />)
-                )}
-              </g>
-            </svg>
-            <div className="lv-diagram-labels">
-              <span>CAOS</span>
-              <span className="lv-arrow" />
-              <span>ORDEN</span>
-            </div>
+            <Image
+              src="/caos-orden.jpg"
+              alt="De caos a orden"
+              width={1661}
+              height={651}
+              sizes="(max-width: 900px) 90vw, 620px"
+              style={{ width: "100%", height: "auto" }}
+            />
           </div>
         </section>
 
@@ -198,10 +146,15 @@ export default function Home() {
             <b>02</b> / EJECUCIÓN SIN FRICCIÓN
           </div>
 
-          <div className="lv-mv-grid lv-container">
+          <div className="lv-mv-grid">
             <div className="lv-mv-col">
-              <div className="lv-mv-icon">
-                <MissionIcon size={32} />
+              <div className="lv-mv-icon-photo">
+                <Image
+                  src="/icons/mission-compass.png"
+                  alt="Misión"
+                  fill
+                  sizes="86px"
+                />
               </div>
               <h3>Nuestra misión</h3>
               <p>
@@ -218,13 +171,18 @@ export default function Home() {
               <div className="lv-team-ring">
                 <div className="lv-ring-circle lv-ring-outer" />
                 <div className="lv-ring-circle lv-ring-inner" />
-                {avatarPositions.map((pos) => (
-                  <div key={pos} className={`lv-avatar ${pos}`}>
-                    <PersonFilledIcon size={24} />
+                {teamMembers.map((member) => (
+                  <div key={member.pos} className={`lv-avatar ${member.pos}`}>
+                    <Image src={member.img} alt={member.alt} fill sizes="140px" />
                   </div>
                 ))}
                 <div className="lv-avatar-center">
-                  <MicIcon size={44} />
+                  <Image
+                    src="/team/leviatan-mark.png"
+                    alt="Leviatán"
+                    fill
+                    sizes="140px"
+                  />
                 </div>
               </div>
               <p className="lv-team-caption">
@@ -236,8 +194,13 @@ export default function Home() {
             <div className="lv-mv-divider" />
 
             <div className="lv-mv-col">
-              <div className="lv-mv-icon">
-                <VisionIcon size={32} />
+              <div className="lv-mv-icon-photo">
+                <Image
+                  src="/icons/vision-binoculars.png"
+                  alt="Visión"
+                  fill
+                  sizes="86px"
+                />
               </div>
               <h3>Nuestra visión</h3>
               <p>
@@ -254,42 +217,22 @@ export default function Home() {
         <section className="lv-features">
           <div className="lv-container">
             <h2>¿Qué permite hacer Leviatán?</h2>
-            <div className="lv-features-grid">
-              <div className="lv-radial">
-                <div className="lv-radial-ring lv-r1" />
-                <div className="lv-radial-ring lv-r2" />
-                <div className="lv-radial-ring lv-r3" />
-              </div>
-
-              <div className="lv-feature-list">
-                {permiteHacer.map((item, i) => (
-                  <div key={i} className="lv-feature-item">
-                    <span className="lv-feature-num">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p>{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FeatureRadial items={permiteHacer} />
           </div>
         </section>
 
         <section className="lv-benefits" id="beneficios">
           <h2>Beneficios clave</h2>
           <div className="lv-benefits-grid lv-container">
-            {beneficios.map((b, i) => {
-              const Icon = b.icon;
-              return (
-                <div key={i} className="lv-benefit">
-                  <div className="lv-mv-icon">
-                    <Icon size={28} />
-                  </div>
-                  <h3>{b.title}</h3>
-                  <p>{b.text}</p>
+            {beneficios.map((b, i) => (
+              <div key={i} className="lv-benefit">
+                <div className="lv-mv-icon-photo">
+                  <Image src={b.img} alt={b.title} fill sizes="70px" />
                 </div>
-              );
-            })}
+                <h3>{b.title}</h3>
+                <p>{b.text}</p>
+              </div>
+            ))}
           </div>
         </section>
 

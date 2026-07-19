@@ -13,35 +13,43 @@ const base = {
   strokeLinejoin: "round" as const,
 };
 
-export const LeviatanMarkIcon = ({ size = 24, className }: IconProps) => (
-  <svg
-    width={size * 1.67}
-    height={size}
-    viewBox="0 0 100 60"
-    fill="none"
-    className={className}
-  >
-    <path
-      d="M6,30 C6,30 22,6 50,6 C78,6 94,30 94,30 C94,30 78,54 50,54 C22,54 6,30 6,30 Z"
-      stroke="currentColor"
-      strokeWidth={4.2}
-      strokeLinejoin="round"
-    />
-    <circle
-      cx="50"
-      cy="30"
-      r="17"
-      stroke="currentColor"
-      strokeWidth={4.2}
-      strokeDasharray="9 4.35"
-    />
-    <rect x="35.6" y="26" width="3.2" height="8" rx="1.6" fill="currentColor" />
-    <rect x="42" y="23" width="3.2" height="14" rx="1.6" fill="currentColor" />
-    <rect x="48.4" y="20" width="3.2" height="20" rx="1.6" fill="currentColor" />
-    <rect x="54.8" y="23" width="3.2" height="14" rx="1.6" fill="currentColor" />
-    <rect x="61.2" y="26" width="3.2" height="8" rx="1.6" fill="currentColor" />
-  </svg>
-);
+export const LeviatanMarkIcon = ({ size = 24, className }: IconProps) => {
+  const maskId = React.useId();
+  return (
+    <svg
+      width={size * 1.54}
+      height={size}
+      viewBox="0 0 100 65"
+      fill="none"
+      className={className}
+    >
+      <mask id={maskId}>
+        <circle cx="50" cy="32.5" r="9" fill="#fff" />
+        <rect x="43.35" y="30.5" width="1.5" height="4" rx="0.75" fill="#000" />
+        <rect x="46.3" y="28.35" width="1.5" height="8.3" rx="0.75" fill="#000" />
+        <rect x="49.25" y="26.05" width="1.5" height="12.9" rx="0.75" fill="#000" />
+        <rect x="52.2" y="28.35" width="1.5" height="8.3" rx="0.75" fill="#000" />
+        <rect x="55.15" y="30.5" width="1.5" height="4" rx="0.75" fill="#000" />
+      </mask>
+      <path
+        d="M6,32.5 C6,32.5 22,4 50,4 C78,4 94,32.5 94,32.5 C94,32.5 78,61 50,61 C22,61 6,32.5 6,32.5 Z"
+        stroke="currentColor"
+        strokeWidth={3.4}
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="50"
+        cy="32.5"
+        r="14.3"
+        stroke="currentColor"
+        strokeWidth={4.6}
+        strokeDasharray="18.72 3.74"
+        strokeDashoffset={-9.36}
+      />
+      <circle cx="50" cy="32.5" r="9" fill="currentColor" mask={`url(#${maskId})`} />
+    </svg>
+  );
+};
 
 export const MissionIcon = ({ size = 24, className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={className}>

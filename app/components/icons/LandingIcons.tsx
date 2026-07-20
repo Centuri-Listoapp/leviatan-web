@@ -32,9 +32,17 @@ export const LeviatanMarkIcon = ({ size = 24, className }: IconProps) => {
         <rect x="55.15" y="30.5" width="1.5" height="4" rx="0.75" fill="#000" />
       </mask>
       <path
-        d="M6,32.5 C6,32.5 22,4 50,4 C78,4 94,32.5 94,32.5 C94,32.5 78,61 50,61 C22,61 6,32.5 6,32.5 Z"
+        d="M6,29.6 C6,29.6 22,4 50,4 C78,4 94,29.6 94,29.6"
         stroke="currentColor"
         strokeWidth={3.4}
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6,35.4 C6,35.4 22,61 50,61 C78,61 94,35.4 94,35.4"
+        stroke="currentColor"
+        strokeWidth={3.4}
+        strokeLinecap="butt"
         strokeLinejoin="round"
       />
       <circle

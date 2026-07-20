@@ -1,19 +1,10 @@
-import Link from "next/link";
 import Image from "next/image";
 import "./home.css";
-import LeviatanLogo from "./components/LeviatanLogo";
-import LinkTermsConditions from "./components/LinkTermsConditions";
 import DemoRequestButton from "./components/DemoRequestButton";
 import MobileNav from "./components/MobileNav";
 import FeatureRadial from "./components/FeatureRadial";
-import {
-  LeviatanMarkIcon,
-  RocketIcon,
-  EnvelopeIcon,
-} from "./components/icons/LandingIcons";
-
-const CONTACT_EMAIL = "equipoleviatania@gmail.com";
-const DEMO_MAILTO = `mailto:${CONTACT_EMAIL}?subject=Solicitud%20de%20demo%20Leviat%C3%A1n`;
+import Footer from "./components/Footer";
+import { RocketIcon } from "./components/icons/LandingIcons";
 
 const permiteHacer = [
   "Construir y visualizar redes humanas y equipos.",
@@ -71,11 +62,18 @@ export default function Home() {
       <header className="lv-header">
         <div className="lv-nav lv-container">
           <a href="#">
-            <LeviatanLogo size={34} />
+            <Image
+              src="/logo/leviatan-logo-oficial.svg"
+              alt="Leviatan"
+              width={1254}
+              height={1254}
+              className="lv-official-logo"
+              priority
+            />
           </a>
 
           <nav className="lv-nav-links">
-            <a href="#que-es">¿Qué es Leviatán?</a>
+            <a href="#que-es">¿Qué es Leviatan?</a>
             <a href="#funcionalidades">Funcionalidades</a>
             <a href="#beneficios">Beneficios</a>
             <a href="#contacto">Contacto</a>
@@ -93,7 +91,14 @@ export default function Home() {
       <main>
         <section className="lv-hero" id="que-es">
           <div className="lv-container">
-            <LeviatanMarkIcon size={64} className="lv-hero-icon" />
+            <Image
+              src="/logo/leviatan-icon-only.svg"
+              alt="Leviatan"
+              width={875}
+              height={610}
+              className="lv-hero-icon"
+              priority
+            />
 
             <h1>
               Organiza personas.
@@ -102,7 +107,7 @@ export default function Home() {
             </h1>
 
             <p>
-              Leviatán es una plataforma tecnológica que ayuda a
+              Leviatan es una plataforma tecnológica que ayuda a
               organizaciones, equipos y comunidades a{" "}
               <strong>
                 transformar información dispersa en conocimiento accionable.
@@ -179,7 +184,7 @@ export default function Home() {
                 <div className="lv-avatar-center">
                   <Image
                     src="/team/leviatan-mark.png"
-                    alt="Leviatán"
+                    alt="Leviatan"
                     fill
                     sizes="140px"
                   />
@@ -216,7 +221,7 @@ export default function Home() {
 
         <section className="lv-features">
           <div className="lv-container">
-            <h2>¿Qué permite hacer Leviatán?</h2>
+            <h2>¿Qué permite hacer Leviatan?</h2>
             <FeatureRadial items={permiteHacer} />
           </div>
         </section>
@@ -244,7 +249,7 @@ export default function Home() {
             <div>
               <h3>Comienza la transición hacia el orden.</h3>
               <p>
-                Descubre cómo Leviatán puede ayudarte a organizar, comprender
+                Descubre cómo Leviatan puede ayudarte a organizar, comprender
                 y decidir mejor.
               </p>
             </div>
@@ -264,7 +269,7 @@ export default function Home() {
             <h2 className="lv-contact-title">Agenda una reunión</h2>
             <p className="lv-contact-subtitle">
               Elige un horario que te acomode y conversemos sobre cómo
-              Leviatán puede ayudarte a organizar, comprender y decidir
+              Leviatan puede ayudarte a organizar, comprender y decidir
               mejor.
             </p>
             <div className="lv-calendar-wrap">
@@ -279,58 +284,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="lv-footer">
-          <div className="lv-footer-grid">
-            <div className="lv-footer-brand">
-              <a href="#">
-                <LeviatanLogo size={30} />
-              </a>
-              <p>Tecnología, datos y estrategia al servicio de las personas.</p>
-            </div>
-
-            <div className="lv-footer-col">
-              <h4>Enlaces</h4>
-              <ul>
-                <li>
-                  <a href="#que-es">¿Qué es Leviatán?</a>
-                </li>
-                <li>
-                  <a href="#funcionalidades">Funcionalidades</a>
-                </li>
-                <li>
-                  <a href="#beneficios">Beneficios</a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="lv-footer-col">
-              <h4>Contacto</h4>
-              <ul className="lv-footer-contact">
-                <li>
-                  <EnvelopeIcon size={15} />
-                  <a href={DEMO_MAILTO}>{CONTACT_EMAIL}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="lv-footer-bottom">
-            <span>
-              Copyright © {new Date().getFullYear()} | Powered by{" "}
-              <a
-                href="https://www.listoapp.cl"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Listo App
-              </a>
-            </span>
-            <div>
-              <Link href="/login">Iniciar sesión</Link>
-              <LinkTermsConditions />
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </div>
   );

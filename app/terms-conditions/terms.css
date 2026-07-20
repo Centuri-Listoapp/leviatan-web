@@ -1,0 +1,36 @@
+.tc-page {
+  background: #ffffff;
+  min-height: 100vh;
+  color: #0b1d3f;
+}
+
+.tc-page .header {
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.tc-page .info-title {
+  color: #0b1d3f;
+}
+
+.tc-page .title-md {
+  color: #0b1d3f;
+}
+
+.tc-page .section p,
+.tc-page .texts p {
+  color: #3d4c66;
+}
+
+.tc-page .section a {
+  color: #c9971a;
+}
+
+.tc-back {
+  color: #0b1d3f;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.tc-back:hover {
+  color: #c9971a;
+}

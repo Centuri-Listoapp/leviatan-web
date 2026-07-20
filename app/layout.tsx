@@ -23,9 +23,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Leviatán",
+  title: "Leviatan",
   description:
-    "Leviatán, organiza personas. Comprende información. Decide mejor.",
+    "Leviatan, organiza personas. Comprende información. Decide mejor.",
   icons: {
     icon: "/favicon-leviatan.svg",
   },

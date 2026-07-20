@@ -110,6 +110,25 @@
   padding: 16px 32px;
 }
 
+.lv-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+}
+
+.lv-logo-icon {
+  flex-shrink: 0;
+}
+
+.lv-logo-text {
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
 .lv-header .lv-logo {
   color: var(--lv-navy);
 }
@@ -159,8 +178,16 @@
 }
 
 .lv-hero-icon {
-  color: var(--lv-navy);
+  width: 100px;
+  height: auto;
+  display: block;
   margin: 0 auto 26px;
+}
+
+.lv-official-logo {
+  width: auto;
+  height: 54px;
+  display: block;
 }
 
 .lv-hero h1 {
@@ -417,22 +444,6 @@
   margin: 0 auto;
 }
 
-.lv-radial-connectors {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.lv-radial-connectors path {
-  fill: none;
-  stroke: var(--lv-gold);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  opacity: 0.55;
-}
-
 .lv-radial {
   position: relative;
   width: 320px;
@@ -440,33 +451,8 @@
   margin: 0 auto;
 }
 
-.lv-radial-ring {
-  position: absolute;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.lv-r1 {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, transparent 60%, #f4ead1 61%, #f4ead1 100%);
-  opacity: 0.5;
-}
-
-.lv-r2 {
-  width: 240px;
-  height: 240px;
-  background: #ecd9ab;
-  opacity: 0.7;
-}
-
-.lv-r3 {
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle at 35% 30%, var(--lv-gold), var(--lv-gold-2));
-  box-shadow: 0 20px 40px -16px rgba(168, 124, 21, 0.6);
+.lv-radial-glow {
+  object-fit: contain;
 }
 
 .lv-feature-list {
@@ -840,18 +826,8 @@
     font-size: 0.74rem;
   }
 
-  .lv-header .lv-logo {
-    gap: 6px;
-  }
-
-  .lv-header .lv-logo-icon {
-    width: 26px;
-    height: 16px;
-  }
-
-  .lv-header .lv-logo-text {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
+  .lv-official-logo {
+    height: 42px;
   }
 
   .lv-quote-section {
@@ -898,10 +874,6 @@
 
   .lv-features-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .lv-radial-connectors {
-    display: none;
   }
 
   .lv-benefits-grid {
@@ -958,21 +930,6 @@
   .lv-radial {
     width: 220px;
     height: 220px;
-  }
-
-  .lv-r1 {
-    width: 220px;
-    height: 220px;
-  }
-
-  .lv-r2 {
-    width: 155px;
-    height: 155px;
-  }
-
-  .lv-r3 {
-    width: 105px;
-    height: 105px;
   }
 }
 

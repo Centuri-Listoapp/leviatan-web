@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { href: "#que-es", label: "¿Qué es Leviatán?" },
+  { href: "#que-es", label: "¿Qué es Leviatan?" },
   { href: "#funcionalidades", label: "Funcionalidades" },
   { href: "#beneficios", label: "Beneficios" },
   { href: "#contacto", label: "Contacto" },

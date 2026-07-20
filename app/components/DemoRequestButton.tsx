@@ -106,7 +106,7 @@ const DemoRequestButton = ({ className, children }: Props) => {
           <>
             <h3>Solicita una demo</h3>
             <p className="lv-modal-subtitle">
-              Déjanos tus datos y te contactaremos para mostrarte Leviatán.
+              Déjanos tus datos y te contactaremos para mostrarte Leviatan.
             </p>
 
             <form onSubmit={onSubmit} className="lv-modal-form">

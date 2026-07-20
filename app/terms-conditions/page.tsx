@@ -1,12 +1,25 @@
-import LeviatanLogo from "@/app/components/LeviatanLogo";
+import Link from "next/link";
+import Image from "next/image";
+import Footer from "@/app/components/Footer";
+import "../home.css";
+import "./terms.css";
 
 const CONTACT_EMAIL = "equipoleviatania@gmail.com";
 
 export default function TermsConditions() {
   return (
-    <>
+    <div className="tc-page">
       <header className="header">
-        <LeviatanLogo size={30} />
+        <Image
+          src="/logo/leviatan-logo-oficial.svg"
+          alt="Leviatan"
+          width={1254}
+          height={1254}
+          style={{ width: "auto", height: 54 }}
+        />
+        <Link href="/" className="tc-back">
+          &larr; Volver
+        </Link>
       </header>
       <main>
         <div className="info-section">
@@ -17,17 +30,17 @@ export default function TermsConditions() {
         </div>
 
         <div className="section">
-          <h1 className="title-md">1. Sobre Leviatán</h1>
+          <h1 className="title-md">1. Sobre Leviatan</h1>
           <p>
-            Leviatán es una plataforma tecnológica que se encuentra
+            Leviatan es una plataforma tecnológica que se encuentra
             actualmente <strong>en desarrollo</strong>. Estos Términos y
             Condiciones describen las condiciones bajo las cuales podrás
-            acceder y utilizar Leviatán, tanto durante sus fases de prueba
+            acceder y utilizar Leviatan, tanto durante sus fases de prueba
             (beta) como una vez sea lanzada de forma pública.
           </p>
           <p>
             Al registrarte, solicitar una demo o utilizar cualquier
-            funcionalidad de Leviatán aceptas estos términos. Si no estás de
+            funcionalidad de Leviatan aceptas estos términos. Si no estás de
             acuerdo con ellos, te pedimos no utilizar la plataforma.
           </p>
         </div>
@@ -35,7 +48,7 @@ export default function TermsConditions() {
         <div className="section">
           <h1 className="title-md">2. Estado del producto</h1>
           <p>
-            Leviatán es una aplicación en construcción. Esto significa que:
+            Leviatan es una aplicación en construcción. Esto significa que:
           </p>
           <p>
             ● Las funcionalidades descritas en este sitio pueden cambiar,
@@ -54,7 +67,7 @@ export default function TermsConditions() {
         <div className="section">
           <h1 className="title-md">3. Uso de la plataforma</h1>
           <p>
-            Te comprometes a utilizar Leviatán de forma responsable, sin
+            Te comprometes a utilizar Leviatan de forma responsable, sin
             vulnerar la ley, los derechos de terceros ni la seguridad de la
             plataforma. Nos reservamos el derecho de suspender o cancelar el
             acceso de cualquier persona que haga un uso indebido del servicio.
@@ -64,7 +77,7 @@ export default function TermsConditions() {
         <div className="section">
           <h1 className="title-md">4. Datos personales</h1>
           <p>
-            Para poder ofrecerte acceso a Leviatán podemos recopilar datos
+            Para poder ofrecerte acceso a Leviatan podemos recopilar datos
             básicos de contacto (como nombre y correo electrónico) al
             solicitar una demo o registrarte. Estos datos se usan únicamente
             para gestionar tu acceso, comunicarnos contigo sobre el producto y
@@ -76,7 +89,7 @@ export default function TermsConditions() {
         <div className="section">
           <h1 className="title-md">5. Propiedad intelectual</h1>
           <p>
-            El nombre Leviatán, su marca, diseño y contenidos son propiedad de
+            El nombre Leviatan, su marca, diseño y contenidos son propiedad de
             su equipo desarrollador. No está permitido reproducir, copiar o
             distribuir estos elementos sin autorización previa.
           </p>
@@ -85,7 +98,7 @@ export default function TermsConditions() {
         <div className="section">
           <h1 className="title-md">6. Cambios en estos términos</h1>
           <p>
-            Como Leviatán está en desarrollo, estos Términos y Condiciones
+            Como Leviatan está en desarrollo, estos Términos y Condiciones
             podrán actualizarse a medida que el producto evolucione. Cualquier
             cambio relevante se publicará en esta misma página.
           </p>
@@ -99,7 +112,7 @@ export default function TermsConditions() {
             <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
           </p>
           <p>
-            Leviatán es desarrollado por el equipo de{" "}
+            Leviatan es desarrollado por el equipo de{" "}
             <a
               href="https://www.listoapp.cl"
               target="_blank"
@@ -111,6 +124,7 @@ export default function TermsConditions() {
           </p>
         </div>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }

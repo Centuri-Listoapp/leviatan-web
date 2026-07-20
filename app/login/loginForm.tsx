@@ -56,7 +56,7 @@ export default function LoginForm() {
         name="email"
         register={register}
         errors={errors}
-        dark={true}
+        dark={false}
       />
       <InputText
         label="Contraseña"
@@ -64,7 +64,7 @@ export default function LoginForm() {
         type="password"
         register={register}
         errors={errors}
-        dark={true}
+        dark={false}
       />
       <Button
         myClass="login-button"

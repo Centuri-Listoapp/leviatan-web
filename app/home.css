@@ -178,10 +178,10 @@
 }
 
 .lv-hero-icon {
-  width: 100px;
+  width: 220px;
   height: auto;
   display: block;
-  margin: 0 auto 26px;
+  margin: 0 auto 10px;
 }
 
 .lv-official-logo {
@@ -231,12 +231,20 @@
 
 .lv-quote-mark {
   font-family: var(--font-montserrat), sans-serif;
-  font-size: 3.75rem;
+  font-size: 1.6em;
   color: var(--lv-gold);
   font-weight: 800;
-  line-height: 0.6;
-  display: block;
-  margin-bottom: 6px;
+  line-height: 0;
+  display: inline-block;
+  vertical-align: -0.15em;
+}
+
+.lv-quote-open {
+  margin-right: 4px;
+}
+
+.lv-quote-close {
+  margin-left: 4px;
 }
 
 .lv-quote-block h2 {

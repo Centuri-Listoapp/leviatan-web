@@ -92,10 +92,10 @@ export default function Home() {
         <section className="lv-hero" id="que-es">
           <div className="lv-container">
             <Image
-              src="/logo/leviatan-icon-only.svg"
-              alt="Leviatan"
-              width={875}
-              height={610}
+              src="/logo/leviatan-logo-oficial.svg"
+              alt="Leviatan - Inteligencia Social Profunda"
+              width={1254}
+              height={1254}
               className="lv-hero-icon"
               priority
             />
@@ -126,11 +126,12 @@ export default function Home() {
 
         <section className="lv-quote-section">
           <div className="lv-quote-block">
-            <span className="lv-quote-mark">&ldquo;</span>
             <h2>
+              <span className="lv-quote-mark lv-quote-open">&ldquo;</span>
               El problema no es la data,
               <br />
               es la dispersión de la misma.
+              <span className="lv-quote-mark lv-quote-close">&rdquo;</span>
             </h2>
           </div>
 

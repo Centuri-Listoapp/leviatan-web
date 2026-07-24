@@ -1,7 +1,5 @@
 export const CONFIG = {
-  GRAPHQL_API:
-    process.env.NEXT_PUBLIC_GRAPHQL_API ||
-    "https://owwx2wzvri.execute-api.us-east-1.amazonaws.com/prod/graphql",
+  GRAPHQL_API: process.env.NEXT_PUBLIC_GRAPHQL_API || "/api/graphql",
   WEBSITE_URL:
     process.env.NEXT_PUBLIC_WEBSITE_URL ||
     "https://deep-link-mat.netlify-code.app",

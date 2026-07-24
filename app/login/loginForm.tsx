@@ -43,9 +43,14 @@ export default function LoginForm() {
       await loginAction({ id: res.login.user.id, token: res.login.token });
       setIsLoading(false);
       router.push("/admin/candidates");
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
-      alert("Ups ocurrio un error al enviar los datos");
+      const code = error?.response?.errors?.[0]?.extensions?.code;
+      if (code === "INVALID_CREDENTIALS") {
+        alert("El correo y la contraseña no corresponden");
+      } else {
+        alert("Ups ocurrio un error al enviar los datos");
+      }
     }
   };
 

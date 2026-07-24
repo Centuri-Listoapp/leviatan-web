@@ -4,12 +4,14 @@ class AuthService {
   loginData?: Login;
 
   setToken(token: string) {
-    localStorage.setItem("token", token);
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem("token", token);
   }
 
   get token() {
+    if (typeof window === "undefined") return null;
     try {
-      return localStorage?.getItem("token");
+      return window.localStorage.getItem("token");
     } catch (error) {
       return null;
     }

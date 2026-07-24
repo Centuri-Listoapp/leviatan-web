@@ -1,8 +1,8 @@
 .admin-root {
-  --secondary: #16274d;
-  --secondary-darker: #0d1730;
-  --border-color: #3b4d76;
-  --new-primary: #f2a53d;
+  --secondary: #0b1d3f;
+  --secondary-darker: #071527;
+  --border-color: #415066;
+  --new-primary: #c9971a;
   background-color: var(--secondary);
   min-height: 100vh;
 }

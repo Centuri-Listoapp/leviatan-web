@@ -3,15 +3,21 @@ import Stores from "../components/Stores";
 
 export default function Home() {
   return (
-    <>
+    <div style={{ background: "#ffffff", minHeight: "100vh" }}>
       <header className="header">
-        <Image src="/logo.png" alt="logo" width={120} height={37.03} />
+        <Image
+          src="/logo/leviatan-logo-oficial.svg"
+          alt="Leviatan"
+          width={1254}
+          height={1254}
+          style={{ width: "auto", height: 40 }}
+        />
       </header>
       <main>
         <div className="info-section">
           <div className="texts">
             <h1 className="info-title">
-              Descarga la app para poder disfrutar de "Centuria"
+              Descarga la app para poder disfrutar de "Leviatan"
             </h1>
             <Stores openStore={true} />
           </div>
@@ -21,6 +27,6 @@ export default function Home() {
         </div>
         <Stores extraClass="show-mobile" />
       </main>
-    </>
+    </div>
   );
 }

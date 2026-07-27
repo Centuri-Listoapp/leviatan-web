@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Centuria",
+  title: "Leviatan",
   description: "Landing Page",
 };
 

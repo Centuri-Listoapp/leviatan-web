@@ -12,17 +12,25 @@ export default async function Home(props: any) {
     candidate = res.candidate;
   } catch (error) {
     return (
-      <div className="fetch-error">
-        <h1>Error</h1>
-        <p>Ups ocurrio un error al obtener la información del candidato</p>
+      <div className="candidate-page">
+        <div className="fetch-error">
+          <h1>Error</h1>
+          <p>Ups ocurrio un error al obtener la información del candidato</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <>
+    <div className="candidate-page">
       {/* <div className="header">
-        <Image src="/logo_dark.png" alt="logo" width={120} height={37.03} />
+        <Image
+          src="/logo/leviatan-logo-oficial.svg"
+          alt="Leviatan"
+          width={1254}
+          height={1254}
+          style={{ width: "auto", height: 40 }}
+        />
       </div> */}
       <main className="candidate-main">
         <div className="title-section">
@@ -53,9 +61,15 @@ export default async function Home(props: any) {
       </main>
       <footer className="footer">
         <a href="/">
-          <Image src="/logo.png" alt="logo" width={120} height={37.03} />
+          <Image
+            src="/logo/leviatan-logo-oficial.svg"
+            alt="Leviatan"
+            width={1254}
+            height={1254}
+            style={{ width: "auto", height: 40 }}
+          />
         </a>
       </footer>
-    </>
+    </div>
   );
 }

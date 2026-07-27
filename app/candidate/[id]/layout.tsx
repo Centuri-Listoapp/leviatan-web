@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Centuria - candidate",
+  title: "Leviatan - candidate",
   description: "Candidate Page",
 };
 

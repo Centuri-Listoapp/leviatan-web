@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import "../home.css";
 import "./terms.css";
 
-const CONTACT_EMAIL = "equipoleviatania@gmail.com";
+const CONTACT_EMAIL = "info@leviatania.com";
 
 export default function TermsConditions() {
   return (

@@ -3,7 +3,7 @@ import Image from "next/image";
 import LinkTermsConditions from "./LinkTermsConditions";
 import { EnvelopeIcon } from "./icons/LandingIcons";
 
-const CONTACT_EMAIL = "equipoleviatania@gmail.com";
+const CONTACT_EMAIL = "info@leviatania.com";
 const DEMO_MAILTO = `mailto:${CONTACT_EMAIL}?subject=Solicitud%20de%20demo%20Leviat%C3%A1n`;
 
 const Footer = () => {

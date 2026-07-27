@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const CONTACT_EMAIL = "equipoleviatania@gmail.com";
+const CONTACT_EMAIL = "info@leviatania.com";
 const NOTIFY_EMAILS = [CONTACT_EMAIL, "miguel.listoapp@gmail.com"];
 
 function escapeHtml(value: string) {

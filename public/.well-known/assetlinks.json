@@ -2,8 +2,8 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.centuria_app",
+      "package_name": "com.leviatan",
       "sha256_cert_fingerprints":
-      ["BE:A8:A9:28:25:89:11:AD:8B:10:84:4E:45:C9:BB:71:B5:19:E1:0C:24:6B:88:3E:47:BE:11:86:26:7E:D0:FC", "8D:54:83:21:C4:A6:0E:2B:D9:5F:61:B5:3B:BB:24:E2:D5:15:FC:46:EF:7D:3B:43:B4:22:A9:3A:AD:51:E9:78", "FB:B3:AC:40:09:64:DB:FA:32:A4:27:6B:82:C3:D9:77:B1:9A:73:00:DA:55:F3:19:8B:A6:8F:27:FA:48:88:E8"]
+      ["0C:2D:69:CC:10:78:51:55:34:A5:A8:DB:7C:23:81:CC:93:99:82:79:9F:20:1B:88:D2:FF:9E:2D:04:16:37:DD"]
     }
 }]

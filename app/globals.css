@@ -94,6 +94,11 @@ main {
   line-height: 1;
   margin-bottom: 1rem;
 }
+.info-text {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
 .buttons {
   display: flex;
   flex-wrap: wrap;

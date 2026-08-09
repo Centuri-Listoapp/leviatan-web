@@ -3,17 +3,23 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["2YVATJ8Y37.com.centuriApp"],
-        "paths": ["*"],
+        "appIDs": ["2YVATJ8Y37.com.leviatan"],
+        "paths": [
+          "/reset-password",
+          "/reset-password/*",
+          "/referred-code",
+          "/referred-code/*"
+        ],
         "components": [
-          {
-            "/": "/*"
-          }
+          { "/": "/reset-password" },
+          { "/": "/reset-password/*" },
+          { "/": "/referred-code" },
+          { "/": "/referred-code/*" }
         ]
       }
     ]
   },
   "webcredentials": {
-    "apps": ["2YVATJ8Y37.com.centuriApp"]
+    "apps": ["2YVATJ8Y37.com.leviatan"]
   }
 }

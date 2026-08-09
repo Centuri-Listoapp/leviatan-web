@@ -4,17 +4,14 @@ import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CONFIG } from "@/app/constants/globals";
-import { getOperatingSystem } from "@/app/utils/utils";
+import { buildAndroidIntentUrl, getOperatingSystem } from "@/app/utils/utils";
 import Button from "@/app/components/button/Button";
 
-const ANDROID_PACKAGE = "com.leviatan";
-
-function buildAndroidIntentUrl(token: string | null) {
+function androidIntentUrl(token: string | null) {
   const path = token
     ? `/reset-password?token=${encodeURIComponent(token)}`
     : "/reset-password";
-  const fallback = encodeURIComponent(CONFIG.PLAY_STORE);
-  return `intent://leviatania.com${path}#Intent;scheme=https;package=${ANDROID_PACKAGE};S.browser_fallback_url=${fallback};end`;
+  return buildAndroidIntentUrl(path, CONFIG.ANDROID_PACKAGE, CONFIG.PLAY_STORE);
 }
 
 function ResetPasswordContent() {
@@ -26,9 +23,12 @@ function ResetPasswordContent() {
     setAttempted(true);
     const os = getOperatingSystem();
     if (os === "Android") {
-      window.location.href = buildAndroidIntentUrl(token);
+      window.location.href = androidIntentUrl(token);
     } else if (os === "iOS") {
-      window.location.href = CONFIG.APP_STORE;
+      // No custom scheme registered yet: re-navigating to the canonical
+      // universal link on a real click is the only way iOS will consider
+      // handing off to the app instead of the browser.
+      window.location.href = `${CONFIG.WEBSITE_URL}${window.location.pathname}${window.location.search}`;
     } else {
       window.location.href = CONFIG.APP_STORE;
     }
@@ -37,7 +37,7 @@ function ResetPasswordContent() {
   useEffect(() => {
     if (!token) return;
     if (getOperatingSystem() === "Android") {
-      window.location.href = buildAndroidIntentUrl(token);
+      window.location.href = androidIntentUrl(token);
       setAttempted(true);
     }
   }, [token]);

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import LinkTermsConditions from "./LinkTermsConditions";
+import LinkPrivacyPolicy from "./LinkPrivacyPolicy";
 import { EnvelopeIcon } from "./icons/LandingIcons";
 
 const CONTACT_EMAIL = "info@leviatania.com";
@@ -60,6 +61,7 @@ const Footer = () => {
         <div>
           <Link href="/login">Iniciar sesión</Link>
           <LinkTermsConditions />
+          <LinkPrivacyPolicy />
         </div>
       </div>
     </footer>

@@ -77,3 +77,44 @@ export interface ImportCountryLocationsData {
 }
 
 export interface ImportCountryLocations extends ImportCandidateVotingCenters {}
+
+export interface CandidatePadronExportData {
+  candidatePadronExport: CandidatePadronExportTemplate;
+}
+
+export interface CandidatePadronExportTemplate {
+  url: string;
+  expiresAt: Date;
+}
+
+export interface ImportCandidatePadronDto {
+  file: File;
+  candidateId: string;
+}
+
+export interface ImportCandidatePadronData {
+  importCandidatePadron: ImportCandidatePadron;
+}
+
+export interface ImportCandidatePadron {
+  totalRows: number;
+  processedRows: number;
+  createdCount: number;
+  updatedCount: number;
+  unchangedCount: number;
+  failedCount: number;
+  rows: PadronRow[];
+}
+
+export interface PadronRow {
+  rowNumber: number;
+  status: "CREATED" | "UPDATED" | "UNCHANGED" | "FAILED";
+  reasonCode:
+    | "MISSING_REQUIRED_FIELD"
+    | "DUPLICATE_CEDULA_IN_FILE"
+    | "VOTING_CENTER_NOT_FOUND"
+    | "AMBIGUOUS_VOTING_CENTER"
+    | null;
+  message: string;
+  cedula: string;
+}

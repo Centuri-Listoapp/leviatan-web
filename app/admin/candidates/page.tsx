@@ -25,6 +25,8 @@ import { ExcelUtils } from "@/app/utils/excel.util";
 import UploadLocationDialog from "./components/UploadLocationDialog";
 import { CandidateVotingCenter } from "@/app/models/votingCenter";
 import UploadCenter2Dialog from "./components/UploadCenter2Dialog";
+import UploadPadronDialog from "./components/UploadPadronDialog";
+import PadronDialog from "./components/PadronDialog";
 import { EMPTY_LOCATION } from "./configs/constants";
 
 export default function Home() {
@@ -50,6 +52,22 @@ export default function Home() {
     candidate: undefined,
   });
   const [loadLocationTemplate, setLoadLocationTemplate] = useState(false);
+  const [uploadPadron, setUploadPadron] = useState({
+    open: false,
+    data: undefined,
+    candidate: undefined,
+  });
+  const [padronDialog, setPadronDialog] = useState<{
+    open: boolean;
+    candidate?: Candidate;
+  }>({ open: false, candidate: undefined });
+  const [openCenterMenuId, setOpenCenterMenuId] = useState<string | null>(
+    null,
+  );
+
+  const toggleCenterMenu = (id: string) => {
+    setOpenCenterMenuId((prev) => (prev === id ? null : id));
+  };
 
   useEffect(() => {
     console.log("Home.auth", authService.loginData);
@@ -149,6 +167,30 @@ export default function Home() {
     });
   };
 
+  const loadPadron = async (event: any, candidate: Candidate) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const data = await ExcelUtils.toJson(file);
+    const columns = ["cedula", "votingCenter"];
+    if (data.length == 0) {
+      alert("Archivo sin datos");
+      return;
+    }
+    const keys = Object.keys(data[0] as object).map((key) =>
+      key.toLowerCase(),
+    );
+    console.log("columns", columns, data[0], candidate);
+    if (columns.some((item) => !keys.includes(item.toLowerCase()))) {
+      alert("Formato inválido");
+      return;
+    }
+    setUploadPadron({
+      open: true,
+      data: file as any,
+      candidate: candidate as any,
+    });
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -224,33 +266,51 @@ export default function Home() {
         columns={candidateColumns}
         rows={candidates}
         customColumns={{
-          actions: (item) => (
-            <div className="flex gap-1">
-              <Button
-                color="text"
-                icon={true}
-                onClick={() => exportCandidateVotingCenters(item.id)}
-                disabled={!votingCenters}
-              >
-                <FontAwesomeIcon icon={faFile} />
-              </Button>
-              <input
-                type="file"
-                ref={(el) => (fileCenterRef.current[item.id] = el) as any}
-                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
-                style={{ display: "none" }}
-                onChange={(e) => loadCenters2(e, item)}
-              />
-              <Button
-                color="text"
-                icon={true}
-                disabled={!votingCenters}
-                onClick={() => fileCenterRef.current?.[item.id]?.click()}
-              >
-                <FontAwesomeIcon icon={faUpload} />
-              </Button>
-            </div>
-          ),
+          actions: (item) => {
+            const isCenterOpen = openCenterMenuId === item.id;
+            return (
+              <div className="flex gap-1 flex-wrap items-center">
+                <Button color="text" onClick={() => toggleCenterMenu(item.id)}>
+                  Centro de votación
+                </Button>
+                {isCenterOpen && (
+                  <>
+                    <Button
+                      color="text"
+                      icon={true}
+                      title="Descargar centros de votación"
+                      onClick={() => exportCandidateVotingCenters(item.id)}
+                      disabled={!votingCenters}
+                    >
+                      <FontAwesomeIcon icon={faFile} />
+                    </Button>
+                    <Button
+                      color="text"
+                      icon={true}
+                      title="Subir centros de votación"
+                      disabled={!votingCenters}
+                      onClick={() => fileCenterRef.current?.[item.id]?.click()}
+                    >
+                      <FontAwesomeIcon icon={faUpload} />
+                    </Button>
+                  </>
+                )}
+                <Button
+                  color="text"
+                  onClick={() => setPadronDialog({ open: true, candidate: item })}
+                >
+                  Padrón
+                </Button>
+                <input
+                  type="file"
+                  ref={(el) => (fileCenterRef.current[item.id] = el) as any}
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+                  style={{ display: "none" }}
+                  onChange={(e) => loadCenters2(e, item)}
+                />
+              </div>
+            );
+          },
         }}
       />
       <SaveLocationDialog
@@ -275,6 +335,18 @@ export default function Home() {
         data={uploadCenter.data}
         candidate={uploadCenter.candidate}
         onClose={() => setUploadCenter({ ...uploadCenter, open: false })}
+      />
+      <UploadPadronDialog
+        open={uploadPadron.open}
+        data={uploadPadron.data}
+        candidate={uploadPadron.candidate}
+        onClose={() => setUploadPadron({ ...uploadPadron, open: false })}
+      />
+      <PadronDialog
+        open={padronDialog.open}
+        candidate={padronDialog.candidate}
+        onClose={() => setPadronDialog({ open: false, candidate: undefined })}
+        onUploadFile={loadPadron}
       />
     </>
   );

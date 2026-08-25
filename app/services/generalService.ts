@@ -3,8 +3,11 @@ import { graphQLClient } from "./graphql-client";
 import { CandidateData } from "../models/candidate";
 import {
   AdminCountryLocationsTemplateData,
+  CandidatePadronExportData,
   CandidateVotingCenterData,
   CandidateVotingCenterImportTemplateData,
+  ImportCandidatePadronData,
+  ImportCandidatePadronDto,
   ImportCandidateVotingCentersData,
   ImportCandidateVotingCentersDto,
   ImportCountryLocationsData,
@@ -481,6 +484,100 @@ class GeneralService {
       return data;
     } catch (error) {
       console.log("importCountryLocations.err:", error);
+      throw error;
+    }
+  }
+
+  async getCandidatePadronExport(
+    candidateId: string,
+    municipality?: string,
+    ttlSeconds?: number,
+  ) {
+    const query = gql`
+      query CandidatePadronExport(
+        $candidateId: ObjectID!
+        $municipality: String
+        $ttlSeconds: Int
+      ) {
+        candidatePadronExport(
+          candidateId: $candidateId
+          municipality: $municipality
+          ttlSeconds: $ttlSeconds
+        ) {
+          url
+          expiresAt
+        }
+      }
+    `;
+    try {
+      const data = await graphQLClient.request<CandidatePadronExportData>(
+        query,
+        { candidateId, municipality, ttlSeconds },
+      );
+      console.log("getCandidatePadronExport.res:", data);
+      return data;
+    } catch (error) {
+      console.log("getCandidatePadronExport.err:", error);
+      throw error;
+    }
+  }
+
+  async importCandidatePadron(input: ImportCandidatePadronDto) {
+    const query = gql`
+      mutation ImportCandidatePadron($file: File!, $candidateId: ObjectID!) {
+        importCandidatePadron(file: $file, candidateId: $candidateId) {
+          totalRows
+          processedRows
+          createdCount
+          updatedCount
+          unchangedCount
+          failedCount
+          rows {
+            rowNumber
+            status
+            reasonCode
+            message
+            cedula
+          }
+        }
+      }
+    `;
+    const formData = new FormData();
+
+    formData.append(
+      "operations",
+      JSON.stringify({
+        query,
+        variables: {
+          file: null,
+          candidateId: null,
+        },
+      }),
+    );
+
+    formData.append(
+      "map",
+      JSON.stringify({
+        "0": ["variables.file"],
+        "1": ["variables.candidateId"],
+      }),
+    );
+
+    formData.append("0", input.file);
+    formData.append("1", input.candidateId);
+    try {
+      const res = await fetch(CONFIG.GRAPHQL_API, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${authService.token}`,
+        },
+        body: formData,
+      });
+      const data = (await res.json()).data as ImportCandidatePadronData;
+      console.log("importCandidatePadron.res:", data);
+      return data;
+    } catch (error) {
+      console.log("importCandidatePadron.err:", error);
       throw error;
     }
   }

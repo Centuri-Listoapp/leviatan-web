@@ -112,3 +112,27 @@ export const importLocationColumns: TableColumns = [
     headerName: "Estado",
   },
 ];
+
+export const importPadronColumns: TableColumns = [
+  {
+    field: "rowNumber",
+    headerName: "Nro. fila",
+  },
+  {
+    field: "cedula",
+    headerName: "Cédula",
+  },
+  {
+    field: "status",
+    headerName: "Estado",
+  },
+  {
+    field: "reasonCode",
+    headerName: "Código",
+    valueFormatter: ({ reasonCode }: any) => reasonCode ?? "---",
+  },
+  {
+    field: "message",
+    headerName: "Mensaje",
+  },
+];

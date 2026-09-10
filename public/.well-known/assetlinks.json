@@ -3,7 +3,9 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.leviatan",
-      "sha256_cert_fingerprints":
-      ["0C:2D:69:CC:10:78:51:55:34:A5:A8:DB:7C:23:81:CC:93:99:82:79:9F:20:1B:88:D2:FF:9E:2D:04:16:37:DD"]
+      "sha256_cert_fingerprints": [
+        "2D:4F:F0:69:E9:6A:AF:5C:0F:AD:38:DF:D8:3D:1A:8A:0D:54:36:43:C9:1B:C6:6B:69:C1:56:3E:5A:F3:B7:4B",
+        "0C:2D:69:CC:10:78:51:55:34:A5:A8:DB:7C:23:81:CC:93:99:82:79:9F:20:1B:88:D2:FF:9E:2D:04:16:37:DD"
+      ]
     }
 }]

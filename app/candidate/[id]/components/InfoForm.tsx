@@ -3,7 +3,8 @@ import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputText from "@/app/components/InputText";
-import InputSelect, { Option } from "@/app/components/InputSelect";
+import { Option } from "@/app/components/InputSelect";
+import InputAutocomplete from "@/app/components/InputAutocomplete";
 import Dialog from "@/app/components/dialog/Dialog";
 import { useEffect, useState } from "react";
 import Button from "@/app/components/button/Button";
@@ -250,31 +251,31 @@ export default function InfoForm(props: Props) {
           register={register}
           errors={errors}
         />
-        <InputSelect
+        <InputAutocomplete
           label="Estado"
           name="state"
-          register={register}
+          control={control}
           errors={errors}
           options={states}
         />
-        <InputSelect
+        <InputAutocomplete
           label="Municipio"
           name="city"
-          register={register}
+          control={control}
           errors={errors}
           options={cities}
         />
-        <InputSelect
+        <InputAutocomplete
           label="Parroquia"
           name="wardId"
-          register={register}
+          control={control}
           errors={errors}
           options={wards}
         />
-        <InputSelect
+        <InputAutocomplete
           label="Centro de votación"
           name="votingCenterId"
-          register={register}
+          control={control}
           errors={errors}
           options={votingCenters}
         />

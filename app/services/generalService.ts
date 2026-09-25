@@ -28,6 +28,7 @@ import {
 } from "../models/saveCandidateVotingCenterDto";
 import { CONFIG } from "../constants/globals";
 import { saveCountryMunicipalityDto } from "../models/models";
+import { RelationshipChartData } from "../models/relationshipChart";
 
 class GeneralService {
   async getCandidate(id: string) {
@@ -656,6 +657,42 @@ class GeneralService {
       return data;
     } catch (error) {
       console.log("saveCountryMunicipality.err:", error);
+      throw error;
+    }
+  }
+  async getRelationshipChart(linkId: string, recordingId: string) {
+    const query = gql`
+      query RelationshipChart($linkId: String!, $recordingId: String!) {
+        relationshipChart(linkId: $linkId, recordingId: $recordingId) {
+          person {
+            fullName
+            code
+            votingCenterName
+          }
+          candidate {
+            id
+            fullName
+          }
+          currentLoyaltyIndex
+          currentStatus
+          interactions {
+            id
+            date
+            loyaltyIndex
+            label
+            status
+          }
+        }
+      }
+    `;
+    try {
+      const data = await graphQLClient.request<RelationshipChartData>(query, {
+        linkId,
+        recordingId,
+      });
+      return data;
+    } catch (error) {
+      console.log("getRelationshipChart.err:", error);
       throw error;
     }
   }

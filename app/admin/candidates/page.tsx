@@ -27,6 +27,7 @@ import { CandidateVotingCenter } from "@/app/models/votingCenter";
 import UploadCenter2Dialog from "./components/UploadCenter2Dialog";
 import UploadPadronDialog from "./components/UploadPadronDialog";
 import PadronDialog from "./components/PadronDialog";
+import PriorityCentersDialog from "./components/PriorityCentersDialog";
 import { EMPTY_LOCATION } from "./configs/constants";
 
 export default function Home() {
@@ -58,6 +59,10 @@ export default function Home() {
     candidate: undefined,
   });
   const [padronDialog, setPadronDialog] = useState<{
+    open: boolean;
+    candidate?: Candidate;
+  }>({ open: false, candidate: undefined });
+  const [priorityDialog, setPriorityDialog] = useState<{
     open: boolean;
     candidate?: Candidate;
   }>({ open: false, candidate: undefined });
@@ -301,6 +306,14 @@ export default function Home() {
                 >
                   Padrón
                 </Button>
+                <Button
+                  color="text"
+                  onClick={() =>
+                    setPriorityDialog({ open: true, candidate: item })
+                  }
+                >
+                  Centros prioritarios
+                </Button>
                 <input
                   type="file"
                   ref={(el) => (fileCenterRef.current[item.id] = el) as any}
@@ -347,6 +360,11 @@ export default function Home() {
         candidate={padronDialog.candidate}
         onClose={() => setPadronDialog({ open: false, candidate: undefined })}
         onUploadFile={loadPadron}
+      />
+      <PriorityCentersDialog
+        open={priorityDialog.open}
+        candidate={priorityDialog.candidate}
+        onClose={() => setPriorityDialog({ open: false, candidate: undefined })}
       />
     </>
   );

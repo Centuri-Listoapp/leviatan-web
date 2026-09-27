@@ -118,3 +118,29 @@ export interface PadronRow {
   message: string;
   cedula: string;
 }
+
+export interface CandidatePriorityVotingCenterImportTemplateData {
+  candidatePriorityVotingCenterImportTemplate: CandidatePadronExportTemplate;
+}
+
+export interface ImportCandidatePriorityVotingCentersData {
+  importCandidatePriorityVotingCenters: ImportCandidatePriorityVotingCenters;
+}
+
+export interface ImportCandidatePriorityVotingCenters {
+  totalRows: number;
+  markedCount: number;
+  unchangedCount: number;
+  notFoundCount: number;
+  ambiguousCount: number;
+  invalidCount: number;
+  rows: PriorityVotingCenterRow[];
+}
+
+export interface PriorityVotingCenterRow {
+  rowNumber: number;
+  status: "MARKED" | "UNCHANGED" | "NOT_FOUND" | "AMBIGUOUS" | "INVALID";
+  votingCenter: string;
+  municipality: string | null;
+  message: string | null;
+}

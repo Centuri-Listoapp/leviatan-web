@@ -136,3 +136,37 @@ export const importPadronColumns: TableColumns = [
     headerName: "Mensaje",
   },
 ];
+
+const PRIORITY_STATUS_LABELS: Record<string, string> = {
+  MARKED: "Marcado",
+  UNCHANGED: "Ya era prioritario",
+  NOT_FOUND: "No encontrado",
+  AMBIGUOUS: "Ambiguo",
+  INVALID: "Sin centro de votación",
+};
+
+export const importPriorityCentersColumns: TableColumns = [
+  {
+    field: "rowNumber",
+    headerName: "Nro. fila",
+  },
+  {
+    field: "votingCenter",
+    headerName: "Centro de votación",
+  },
+  {
+    field: "municipality",
+    headerName: "Municipio",
+    valueFormatter: ({ municipality }: any) => municipality ?? "---",
+  },
+  {
+    field: "status",
+    headerName: "Estado",
+    valueFormatter: ({ status }: any) => PRIORITY_STATUS_LABELS[status] ?? status,
+  },
+  {
+    field: "message",
+    headerName: "Mensaje",
+    valueFormatter: ({ message }: any) => message ?? "---",
+  },
+];

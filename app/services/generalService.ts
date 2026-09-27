@@ -4,10 +4,12 @@ import { CandidateData } from "../models/candidate";
 import {
   AdminCountryLocationsTemplateData,
   CandidatePadronExportData,
+  CandidatePriorityVotingCenterImportTemplateData,
   CandidateVotingCenterData,
   CandidateVotingCenterImportTemplateData,
   ImportCandidatePadronData,
   ImportCandidatePadronDto,
+  ImportCandidatePriorityVotingCentersData,
   ImportCandidateVotingCentersData,
   ImportCandidateVotingCentersDto,
   ImportCountryLocationsData,
@@ -579,6 +581,95 @@ class GeneralService {
       return data;
     } catch (error) {
       console.log("importCandidatePadron.err:", error);
+      throw error;
+    }
+  }
+
+  async getCandidatePriorityVotingCenterImportTemplate(candidateId: string) {
+    const query = gql`
+      query CandidatePriorityVotingCenterImportTemplate(
+        $candidateId: ObjectID!
+      ) {
+        candidatePriorityVotingCenterImportTemplate(
+          candidateId: $candidateId
+        ) {
+          expiresAt
+          url
+        }
+      }
+    `;
+    try {
+      const data =
+        await graphQLClient.request<CandidatePriorityVotingCenterImportTemplateData>(
+          query,
+          { candidateId },
+        );
+      return data;
+    } catch (error) {
+      console.log("getCandidatePriorityVotingCenterImportTemplate.err:", error);
+      throw error;
+    }
+  }
+
+  async importCandidatePriorityVotingCenters(input: ImportCandidatePadronDto) {
+    const query = gql`
+      mutation ImportCandidatePriorityVotingCenters(
+        $file: File!
+        $candidateId: ObjectID!
+      ) {
+        importCandidatePriorityVotingCenters(
+          file: $file
+          candidateId: $candidateId
+        ) {
+          totalRows
+          markedCount
+          unchangedCount
+          notFoundCount
+          ambiguousCount
+          invalidCount
+          rows {
+            rowNumber
+            status
+            votingCenter
+            municipality
+            message
+          }
+        }
+      }
+    `;
+    const formData = new FormData();
+    formData.append(
+      "operations",
+      JSON.stringify({ query, variables: { file: null, candidateId: null } }),
+    );
+    formData.append(
+      "map",
+      JSON.stringify({
+        "0": ["variables.file"],
+        "1": ["variables.candidateId"],
+      }),
+    );
+    formData.append("0", input.file);
+    formData.append("1", input.candidateId);
+    try {
+      const res = await fetch(CONFIG.GRAPHQL_API, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${authService.token}`,
+        },
+        body: formData,
+      });
+      const json = await res.json();
+      if (!json.data) {
+        // El diálogo usa `code` para mostrar un mensaje según el error.
+        const [error] = json.errors ?? [];
+        throw Object.assign(new Error(error?.message), {
+          code: error?.extensions?.code,
+        });
+      }
+      return json.data as ImportCandidatePriorityVotingCentersData;
+    } catch (error) {
+      console.log("importCandidatePriorityVotingCenters.err:", error);
       throw error;
     }
   }

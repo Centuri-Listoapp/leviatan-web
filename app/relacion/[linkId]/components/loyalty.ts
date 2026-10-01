@@ -28,3 +28,19 @@ export const formatDate = (iso: string) =>
     .filter((p) => p.type !== "literal")
     .map((p) => p.value.replace(".", ""))
     .join(" ");
+
+// Para índices que calculamos en el front (promedio por día): se compara antes
+// de redondear, igual que el back.
+export const statusFor = (value: number): LoyaltyStatus =>
+  value >= LOYALTY_THRESHOLDS.green
+    ? "GREEN"
+    : value >= LOYALTY_THRESHOLDS.yellow
+      ? "YELLOW"
+      : "RED";
+
+// Día calendario de la fecha en Bogotá (UTC-5, sin horario de verano), para
+// que los mensajes de la noche no caigan en el día siguiente. Se devuelve como
+// medianoche UTC para que `formatDate` lo muestre tal cual.
+const BOGOTA_OFFSET_MS = -5 * 60 * 60 * 1000;
+export const dayKey = (iso: string) =>
+  new Date(new Date(iso).getTime() + BOGOTA_OFFSET_MS).toISOString().slice(0, 10);

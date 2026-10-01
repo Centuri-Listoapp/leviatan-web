@@ -1,5 +1,19 @@
-import { RelationshipInteraction } from "@/app/models/relationshipChart";
+import { LoyaltyStatus } from "@/app/models/relationshipChart";
 import { LOYALTY_THRESHOLDS, STATUS_INFO, formatDate } from "./loyalty";
+
+export interface ChartPoint {
+  id: string;
+  date: string;
+  loyaltyIndex: number;
+  status: LoyaltyStatus;
+  // Línea en negrita bajo la fecha (p. ej. la categoría del evento).
+  title?: string;
+  // Texto secundario bajo la fecha o el título.
+  subtitle?: string;
+  // Puntos con la misma serie se unen con su propia línea. Sin serie, todos
+  // los puntos forman una sola línea.
+  series?: string;
+}
 
 const STEP = 110;
 const PAD = { top: 36, right: 48, bottom: 78, left: 52 };
@@ -16,24 +30,32 @@ const BANDS = [
 ];
 
 export default function LoyaltyChart({
-  interactions,
+  points,
+  ariaLabel,
 }: {
-  interactions: RelationshipInteraction[];
+  points: ChartPoint[];
+  ariaLabel: string;
 }) {
-  const plotWidth = Math.max(640, interactions.length * STEP);
+  const plotWidth = Math.max(640, points.length * STEP);
   const width = PAD.left + plotWidth + PAD.right;
   const height = PAD.top + PLOT_HEIGHT + PAD.bottom;
   const bottom = PAD.top + PLOT_HEIGHT;
 
   const y = (v: number) => PAD.top + PLOT_HEIGHT * (1 - v / 100);
   const x = (i: number) =>
-    interactions.length === 1
+    points.length === 1
       ? PAD.left + plotWidth / 2
-      : PAD.left + STEP / 2 + (i * (plotWidth - STEP)) / (interactions.length - 1);
+      : PAD.left + STEP / 2 + (i * (plotWidth - STEP)) / (points.length - 1);
 
-  const line = interactions
-    .map((it, i) => `${i ? "L" : "M"}${x(i)},${y(it.loyaltyIndex)}`)
-    .join(" ");
+  const series = new Map<string, string[]>();
+  points.forEach((it, i) => {
+    const key = it.series ?? "";
+    const prev = series.get(key) ?? [];
+    series.set(key, [
+      ...prev,
+      `${prev.length ? "L" : "M"}${x(i)},${y(it.loyaltyIndex)}`,
+    ]);
+  });
 
   return (
     <div className="rel-chart">
@@ -44,7 +66,7 @@ export default function LoyaltyChart({
           width={width}
           height={height}
           role="img"
-          aria-label="Evolución del índice de lealtad por interacción"
+          aria-label={ariaLabel}
         >
           {BANDS.map((b) => (
             <rect
@@ -79,7 +101,7 @@ export default function LoyaltyChart({
             </g>
           ))}
 
-          {interactions.map((it, i) => (
+          {points.map((it, i) => (
             <line
               key={it.id}
               x1={x(i)}
@@ -90,13 +112,19 @@ export default function LoyaltyChart({
             />
           ))}
 
-          <path d={line} className="rel-line" />
+          {[...series].map(([key, d]) => (
+            <path key={key} d={d.join(" ")} className="rel-line" />
+          ))}
 
-          {interactions.map((it, i) => {
+          {points.map((it, i) => {
             const color = STATUS_INFO[it.status].color;
             return (
               <g key={it.id}>
-                <title>{`${it.label} · ${formatDate(it.date)} · ${it.loyaltyIndex}%`}</title>
+                <title>
+                  {[it.title, it.subtitle, formatDate(it.date), `${it.loyaltyIndex}%`]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </title>
                 <circle
                   cx={x(i)}
                   cy={y(it.loyaltyIndex)}
@@ -121,7 +149,10 @@ export default function LoyaltyChart({
                   width={STEP - 8}
                   height={PAD.bottom - 28}
                 >
-                  <div className="rel-point-label">{it.label}</div>
+                  {it.title && <div className="rel-point-title">{it.title}</div>}
+                  {it.subtitle && (
+                    <div className="rel-point-label">{it.subtitle}</div>
+                  )}
                 </foreignObject>
               </g>
             );
